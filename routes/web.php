@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('shop.index');
-});
+})->name('raiz');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
