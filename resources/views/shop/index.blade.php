@@ -25,7 +25,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     <img src="{{ asset('img/Logo.png') }}" alt="logo" style="width: 108px; height: 87px;">
                 </h2>
-                <a href="{{route('dashboard')}}">
+                <a href="{{ route('dashboard') }}">
                     <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 41px; height: 41px;">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,18 +63,13 @@
                             <button
                                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 $329.000
-                                {{-- <svg class="" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                </svg> --}}
                                 <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                     class="rtl:rotate-180 w-3.5 h-3.5 ms-2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                 </svg>
-                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +101,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                 </svg>
-                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -138,7 +133,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                 </svg>
-                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -170,7 +165,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                 </svg>
-                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -202,7 +197,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                 </svg>
-                                </a>
+                            </button>
                         </div>
                     </div>
                 </div>
