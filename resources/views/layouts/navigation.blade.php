@@ -6,9 +6,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
+                    <x-application-logo>
+                    </x-application-logo>
                 </div>
 
                 <!-- Navigation Links -->
@@ -38,8 +37,10 @@
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div class="relative">
-                                <img class="mr-4 border-2 w-10 h-10 rounded" src="{{ asset('img/avatars/avatar_default.png') }}" alt="">
-                                <span class="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                <img class="mr-4 border-2 w-10 h-10 rounded"
+                                    src="{{ asset('img/avatars/avatar_default.png') }}" alt="">
+                                <span
+                                    class="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                             </div>
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ms-1">
@@ -93,6 +94,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('Usuarios') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('raiz')" :active="request()->routeIs('raiz')">
+                {{ __('Tienda') }}
             </x-responsive-nav-link>
         </div>
 
