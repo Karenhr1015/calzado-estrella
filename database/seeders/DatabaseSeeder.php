@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Color;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(15)->create();
+        Color::factory(10)->create();
     }
 }

@@ -7,6 +7,8 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./src/**/*.{html,js}",
+        "./node_modules/tw-elements/js/**/*.js"
     ],
 
     theme: {
@@ -21,5 +23,7 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require("tw-elements/plugin.cjs")],
+    // plugins: [require("tw-elements/plugin.cjs")],
+    darkMode: "class"
 };

@@ -8,6 +8,9 @@
             </div>
         </div>
     </div>
+    {{-- Carrusel --}}
+    <x-carousel></x-carousel>
+    {{-- Products --}}
     <div class="py-12 flex flex-wrap justify-center gap-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
