@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
-class ColorController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $colors = Color::latest()->paginate();
+        $sizes = Size::latest()->paginate();
 
-        return view('colors.index', compact('colors'));
+        return view('sizes.index', compact('sizes'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('colors.create');
+        return view('sizes.create');
     }
 
     /**
@@ -30,13 +30,9 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'color' => 'required'
-        ]);
+        Size::create($request->all());
 
-        Color::create($request->all());
-
-        return redirect()->route('colors.index');
+        return redirect()->route('sizes.index');
     }
 
     /**

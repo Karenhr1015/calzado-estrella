@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\ColorController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SeasonController;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 /* Rutas para la Tienda */
 Route::view('/', 'shop.index')->name('raiz');
@@ -18,8 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     /* Users */
     Route::resource('users', UserController::class);
-    /* Users */
+    /* Colors */
     Route::resource('colors', ColorController::class);
+    /* Tallas */
+    Route::resource('sizes', SizeController::class);
+    /* Temporadas */
+    Route::resource('seasons', SeasonController::class);
+    /* Productos */
+    Route::resource('products', ProductController::class);
 });
 
 

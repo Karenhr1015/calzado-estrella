@@ -255,5 +255,16 @@
     "Your email address is unverified.": "Su dirección de correo electrónico no está verificada.",
     "Add User": "Añadir Usuario",
     "Created_at": "Fecha de Creacion",
-    "Welcome, administrator!": "Bienvenido, administrador!"
+    "Welcome, administrator!": "Bienvenido, administrador!",
+    "Role": "Rol",
+    "Company Name": "Nombre de la empresa",
+    "Customer type": "Tipo de cliente",
+    "Manage Catalog": "Gestionar Catálogo",
+    "Colors": "Colores",
+    "Sizes": "Tallas",
+    "Products": "Productos",
+    "Manage Inventory": "Gestionar Inventario",
+    "Administration": "Administración",
+    "Users": "Usuarios",
+    "Clients": "Clientes"
 }

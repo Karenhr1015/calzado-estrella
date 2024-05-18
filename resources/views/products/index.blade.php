@@ -25,14 +25,14 @@
                         </div>
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <a href="{{ route('users.create') }}">
+                            <a href="{{ route('products.create') }}">
                                 <x-primary-button>
                                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                         <path clip-rule="evenodd" fill-rule="evenodd"
                                             d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                     </svg>
-                                    {{ __('Add User') }}
+                                    {{ __('Añadir Producto') }}
                                 </x-primary-button>
                             </a>
                         </div>
@@ -43,24 +43,28 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-4">{{ __('Id') }}</th>
-                                    <th scope="col" class="px-4 py-3">{{ __('User') }}</th>
-                                    <th scope="col" class="px-4 py-3">{{ __('Email') }}</th>
-                                    <th scope="col" class="px-4 py-3">{{ __('Role') }}</th>
+                                    <th scope="col" class="px-4 py-3">{{ __('Codigo') }}</th>
+                                    <th scope="col" class="px-4 py-3">{{ __('Referencia') }}</th>
+                                    <th scope="col" class="px-4 py-3">{{ __('Color') }}</th>
+                                    <th scope="col" class="px-4 py-3">{{ __('Talla') }}</th>
+                                    <th scope="col" class="px-4 py-3">{{ __('Temporada') }}</th>
                                     <th scope="col" class="px-4 py-3">{{ __('Created_at') }}</th>
                                     <th scope="col" class="px-4 py-3 ">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($products as $product)
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->id }}
+                                            {{ $product->id }}
                                         </th>
-                                        <td class="px-4 py-3">{{ $user->name }}</td>
-                                        <td class="px-4 py-3">{{ $user->email }}</td>
-                                        <td class="px-4 py-3">{{ $user->role->name }}</td>
-                                        <td class="px-4 py-3 max-w-[12rem] truncate">{{ $user->created_at }}</td>
+                                        <td class="px-4 py-3">{{ $product->code }}</td>
+                                        <td class="px-4 py-3">{{ $product->name }}</td>
+                                        <td class="px-4 py-3">{{ $product->color->color }}</td>
+                                        <td class="px-4 py-3">{{ $product->size->value }}</td>
+                                        <td class="px-4 py-3">{{ $product->season->name }}</td>
+                                        <td class="px-4 py-3 max-w-[12rem] truncate">{{ $product->created_at }}</td>
                                         <td></td>
                                     </tr>
                                 @endforeach
@@ -69,7 +73,7 @@
                     </div>
                 </div>
                 <br>
-                {{ $users->links() }}
+                {{$products->links()}}
             </div>
         </section>
     </div>

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Color;
+use App\Models\Season;
 use Illuminate\Http\Request;
 
-class ColorController extends Controller
+class SeasonController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $colors = Color::latest()->paginate();
+        $seasons = Season::latest()->paginate();
 
-        return view('colors.index', compact('colors'));
+        return view('seasons.index', compact('seasons'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('colors.create');
+        return view('seasons.create');
     }
 
     /**
@@ -30,13 +30,9 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'color' => 'required'
-        ]);
+        Season::create($request->all());
 
-        Color::create($request->all());
-
-        return redirect()->route('colors.index');
+        return redirect()->route('seasons.index');
     }
 
     /**

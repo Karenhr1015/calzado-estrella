@@ -10,7 +10,7 @@ export default {
         "./src/**/*.{html,js}",
         "./node_modules/tw-elements/js/**/*.js"
     ],
-
+    darkMode: false,
     theme: {
         extend: {
             fontFamily: {
