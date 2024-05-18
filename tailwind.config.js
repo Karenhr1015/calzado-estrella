@@ -14,6 +14,10 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                navColor: '#D5C4D7',
+                navIcon: '#080640',
+            },
         },
     },
 
