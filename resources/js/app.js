@@ -14,10 +14,6 @@ import Pickr from '@simonwep/pickr';
 
 Alpine.start();
 
-Alpine.data('form-modal', () => ({
-    // Propiedades y métodos de tu componente Alpine.js
-}));
-
 initTWE({ Carousel });
 
 // Simple example, see optional options for more configuration.

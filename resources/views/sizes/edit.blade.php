@@ -2,17 +2,18 @@
     {{-- Header --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Añadir Talla') }}
+            {{ __('Editar Talla') }} : {{ $size->value }}
         </h2>
     </x-slot>
     <div class="py-12">
-        <form class="max-w-sm mx-auto" action="{{ route('sizes.store') }}" method="POST">
+        <form class="max-w-sm mx-auto" action="{{ route('sizes.update', $size->id) }}" method="POST">
             @csrf
+            @method('PUT')
 
             {{-- Talla --}}
             <div class="mb-5">
                 <x-input-label for="value" :value="__('Talla')" />
-                <x-text-input id="value" class="block mt-1 w-full" name="value" :value="old('value')" required autofocus
+                <x-text-input id="value" class="block mt-1 w-full" name="value" :value="old('value', $size->value)" required autofocus
                     autocomplete="value" :placeholder="__('Ingrese una talla...')" />
             </div>
             {{-- Talla Validacion --}}

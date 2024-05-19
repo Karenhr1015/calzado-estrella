@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SizeRequest;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,11 @@ class SizeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SizeRequest $request)
     {
         Size::create($request->all());
 
-        return redirect()->route('sizes.index');
+        return to_route('sizes.index')->with('status', __('La talla se ha creado correctamente.'));
     }
 
     /**
@@ -48,22 +49,32 @@ class SizeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $size = Size::find($id);
+        return view('sizes.edit', compact('size'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SizeRequest $request, string $id)
     {
-        //
+        $size = Size::find($id);
+        $size->update($request->all());
+        return to_route('sizes.index')->with('status', __('La talla se ha editado correctamente.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $size = Size::find($id);
+        $size->update(['status' => $request->input('status') ? 0 : 1]);
+        
+        if($request->input('status')){
+            return to_route('sizes.index')->with('status', __('La talla se ha inactivado correctamente..'));
+        }else{
+            return to_route('sizes.index')->with('status', __('La talla se ha activado correctamente.'));
+        }
     }
 }

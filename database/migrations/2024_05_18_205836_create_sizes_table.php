@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->string('value');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
