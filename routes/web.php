@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     /* Colors */
     Route::resource('colors', ColorController::class);
+        
     /* Tallas */
     Route::resource('sizes', SizeController::class);
     /* Temporadas */

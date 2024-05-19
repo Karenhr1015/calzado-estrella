@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ColorRequest;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
@@ -28,15 +29,11 @@ class ColorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ColorRequest $request)
     {
-        $request->validate([
-            'color' => 'required'
-        ]);
-
         Color::create($request->all());
 
-        return redirect()->route('colors.index');
+        return to_route('colors.index')->with('status', __('The color has been created successfully.'));
     }
 
     /**
@@ -50,24 +47,34 @@ class ColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Color $color)
     {
-        //
+        $color = Color::find($color->id);
+        return view('colors.edit', compact('color'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ColorRequest $request, string $id)
     {
-        //
+        $color = Color::find($id);
+        $color->update($request->all());
+        return to_route('colors.index')->with('status', __('The color has been edited successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $color = Color::find($id);
+        $color->update(['status' => $request->input('status') ? 0 : 1]);
+        
+        if($request->input('status')){
+            return to_route('colors.index')->with('status', __('The color has been disabled successfully.'));
+        }else{
+            return to_route('colors.index')->with('status', __('The color has been enable successfully.'));
+        }
     }
 }

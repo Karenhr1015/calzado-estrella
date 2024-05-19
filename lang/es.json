@@ -266,5 +266,11 @@
     "Manage Inventory": "Gestionar Inventario",
     "Administration": "Administración",
     "Users": "Usuarios",
-    "Clients": "Clientes"
+    "Clients": "Clientes",
+    "The color has been created successfully.": "El color se ha creado correctamente.",
+    "The color has been edited successfully.": "El color se ha editado correctamente.",
+    "The color has been disabled successfully.": "El color se ha desactivado correctamente.",
+    "Active": "Activo",
+    "Inactive": "Inactivo",
+    "The color has been enable successfully.": "El color se ha activado correctamente."
 }
