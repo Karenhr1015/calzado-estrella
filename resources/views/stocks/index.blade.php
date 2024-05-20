@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Colors') }}
+            {{ __('Inventario') }}
         </h2>
     </x-slot>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
@@ -35,48 +35,53 @@
                     </div>
                     <div
                         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('colors.create') }}">
+                        <a href="{{ route('stocks.create') }}">
                             <x-primary-button>
                                 <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                {{ __('Añadir Color') }}
+                                {{ __('Añadir a inventario') }}
                             </x-primary-button>
                         </a>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 p-5">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">{{ __('Id') }}</th>
-                                <th scope="col" class="px-4 py-3">{{ __('Nombre') }}</th>
-                                <th scope="col" class="px-4 py-3">{{ __('Color') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('producto') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Cantidad Disponible') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Estado') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Created_at') }}</th>
                                 <th>{{-- Acciones --}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($colors as $color)
+                            @foreach ($stocks as $stock)
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $color->id }}
+                                        {{ $stock->id }}
                                     </th>
-                                    <td class="px-4 py-3">{{ $color->color }}</td>
+
                                     <td class="px-4 py-3">
-                                        <div class="w-6 h-6 border-2 border-black-200"
-                                            style="background-color:{{ $color->color_hex }};"></div>
+                                        ({{ $stock->product->code }})
+                                        {{ $stock->product->name }} | Color:
+                                        {{ $stock->product->color->color }} | Talla:
+                                        {{ $stock->product->size->value }} | Temporada:
+                                        {{ $stock->product->season->name }}
+                                        | Precio: {{ $stock->product->price }}
                                     </td>
+                                    <td class="px-4 py-3"> {{ $stock->amount }} </td>
                                     <td class="px-4 py-3">
-                                        <x-status :type="$color->status"></x-status>
+                                        <x-status :type="$stock->status"></x-status>
                                     </td>
-                                    <td class="px-4 py-3 max-w-[12rem] truncate">{{ $color->created_at }}</td>
+                                    <td class="px-4 py-3 max-w-[12rem] truncate">{{ $stock->created_at }}</td>
                                     <td class="flex gap-5">
-                                        <a href="{{ route('colors.edit', $color) }}">
+                                        <a href="{{ route('stocks.edit', $stock) }}">
                                             <x-secondary-button>
                                                 <div class="flex gap-2 items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
@@ -88,16 +93,16 @@
                                                 </div>
                                             </x-secondary-button>
                                         </a>
-                                        <form action="{{ route('colors.destroy', $color->id) }}" method="POST">
+                                        <form action="{{ route('stocks.destroy', $stock->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="hidden" name="status" value="{{ $color->status }}">
-                                            <a :href="route('colors.destroy', $color - > id)"
+                                            <input type="hidden" name="status" value="{{ $stock->status }}">
+                                            <a :href="route('stocks.destroy', $stock - > id)"
                                                 onclick="event.preventDefault(); this.closest('form').submit()">
                                                 <x-secondary-button>
                                                     <div class="flex gap-2 items-center">
-                                                        <x-status-button :status="$color->status"></x-status-button>
-                                                        {{ $color->status ? __('Inactivar') : __('Activar') }}
+                                                        <x-status-button :status="$stock->status"></x-status-button>
+                                                        {{ $stock->status ? __('Inactivar') : __('Activar') }}
                                                     </div>
                                                 </x-secondary-button>
                                             </a>
@@ -110,7 +115,7 @@
                 </div>
             </div>
             <br>
-            {{ $colors->links() }}
+            {{ $stocks->links() }}
         </div>
     </section>
 </x-app-layout>

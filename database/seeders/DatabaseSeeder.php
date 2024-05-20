@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         /* Usuario Admin */
         User::factory()->create([
             'name' => 'admin',
-            'email' => 'admin@admin.com',
+            'email' => 'prueba@calzadoestrella.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'role_id' => 1,
@@ -65,7 +65,13 @@ class DatabaseSeeder extends Seeder
             'color_hex' => '#000000',
         ]);
 
-        Size::factory(10)->create();
+        // Size::factory(10)->create();
+        Size::factory()->create([
+            'value' => '35',
+        ]);
+        Size::factory()->create([
+            'value' => '44',
+        ]);
 
         /* Temporadas */
         Season::factory()->create([

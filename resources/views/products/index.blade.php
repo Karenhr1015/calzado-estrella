@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
-        <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 {{-- Alertas --}}
                 @if (session('status'))
@@ -58,6 +58,8 @@
                                 <th scope="col" class="px-4 py-3">{{ __('Talla') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Temporada') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Precio') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Precio mayorista') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Descripcion') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Estado') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Created_at') }}</th>
                                 <th scope="col" class="px-4 py-3 ">{{ __('Actions') }}</th>
@@ -80,6 +82,17 @@
                                     <td class="px-4 py-3">{{ $product->size->value }}</td>
                                     <td class="px-4 py-3">{{ $product->season->name }}</td>
                                     <td class="px-4 py-3">{{ $product->price }}</td>
+                                    <td class="px-4 py-3">{{ $product->wholesale_price }}</td>
+                                    <td class="px-4 py-3">
+                                        <button
+                                            onclick="popDescription('{{ $product->description }}', '{{ $product->name }}', '{{ $product->code }}', '{{ $product->color->color }}', '{{ $product->size->value }}', '{{ $product->season->name }}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                viewBox="0 0 576 512">
+                                                <path fill="#080640"
+                                                    d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                                            </svg>
+                                        </button>
+                                    </td>
                                     <td class="px-4 py-3">
                                         <x-status :type="$product->status"></x-status>
                                     </td>
@@ -105,19 +118,7 @@
                                                 onclick="event.preventDefault(); this.closest('form').submit()">
                                                 <x-secondary-button>
                                                     <div class="flex gap-2 items-center">
-                                                        @if ($product->status)
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                viewBox="0 0 448 512">
-                                                                <path fill="#eb3223"
-                                                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                                                            </svg>
-                                                        @else
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                viewBox="0 0 448 512">
-                                                                <path fill="#eb3223"
-                                                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                                                            </svg>
-                                                        @endif
+                                                        <x-status-button :status="$product->status"></x-status-button>
                                                         {{ $product->status ? __('Inactivar') : __('Activar') }}
                                                     </div>
                                                 </x-secondary-button>
@@ -135,3 +136,13 @@
         </div>
     </section>
 </x-app-layout>
+
+<script>
+    function popDescription(text, name, code, color, talla, temporada) {
+        Swal.fire({
+            title: `Producto: (${code}) ${name} | Color: ${color} | Talla: ${talla} | Temporada: ${temporada}`,
+            text: text,
+            confirmButtonText: 'Cerrar',
+        });
+    }
+</script>

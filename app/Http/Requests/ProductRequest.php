@@ -31,7 +31,7 @@ class ProductRequest extends FormRequest
         }
  */
         /* Season_id para validaciones */
-        $productId = $this->route('product') ? $this->route('product')->id : null;
+        $productId = $this->route('product') ? $this->route('product') : null;
 
         return [
             'name' => ['required', new UniqueProductAttributes($productId)],
@@ -42,6 +42,7 @@ class ProductRequest extends FormRequest
                 })
             ],
             'price' => 'required|integer|min:0',
+            'wholesale_price' => 'required|integer|min:0',
             'color_id' => 'exists:colors,id',
             'size_id' => 'exists:sizes,id',
             'season_id' => 'exists:seasons,id',
@@ -52,6 +53,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'El campo referencia es obligatorio.',
+            'wholesale_price.required' => 'El campo precio mayorista es obligatorio.',
             'code.unique' => 'El codigo ya existe.',
             'color_id.exists' => 'El color seleccionado no existe.',
             'size_id.exists' => 'La talla seleccionada no existe.',

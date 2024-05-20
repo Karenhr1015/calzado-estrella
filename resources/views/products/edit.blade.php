@@ -78,6 +78,25 @@
                     {{-- Precio Validacion --}}
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
+
+                {{-- Precio mayorista --}}
+                <div class="mb-5">
+                    <x-input-label for="wholesale_price" :value="__('Precio mayorista')" />
+                    <x-text-input id="wholesale_price" class="block mt-1 w-full" name="wholesale_price"
+                        :value="old('wholesale_price', $product->wholesale_price)" :placeholder="__('Ingrese el precio mayorista...')" type='number' min="0" />
+                    {{-- Precio Validacion --}}
+                    <x-input-error :messages="$errors->get('wholesale_price')" class="mt-2" />
+                </div>
+
+                 {{-- Descripcion --}}
+                 <div class="mb-5">
+                    <x-input-label for="description" :value="__('Descripcion')" />
+                    <textarea name="description" id="description" cols="30" rows="10" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            {{ old('description', $product->description) }}
+                    </textarea>
+                    {{-- Precio Validacion --}}
+                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                </div>
             </div>
 
             {{-- Btn Submit --}}
