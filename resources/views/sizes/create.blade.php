@@ -12,7 +12,7 @@
             {{-- Talla --}}
             <div class="mb-5">
                 <x-input-label for="value" :value="__('Talla')" />
-                <x-text-input id="value" class="block mt-1 w-full" name="value" :value="old('value')" required autofocus
+                <x-text-input id="value" class="block mt-1 w-full" name="value" :value="old('value')" autofocus
                     autocomplete="value" :placeholder="__('Ingrese una talla...')" />
             </div>
             {{-- Talla Validacion --}}

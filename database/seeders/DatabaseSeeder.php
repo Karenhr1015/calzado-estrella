@@ -43,7 +43,28 @@ class DatabaseSeeder extends Seeder
         User::factory(15)->create();
         
         /* Gestionar Catalogo */
-        Color::factory(10)->create();
+    
+        Color::factory()->create([
+            'color' => 'Rojo',
+            'color_hex' => '#FF0000',
+        ]);
+        Color::factory()->create([
+            'color' => 'Verde',
+            'color_hex' => '#00FF00',
+        ]);
+        Color::factory()->create([
+            'color' => 'Azul',
+            'color_hex' => '#0000FF',
+        ]);
+        Color::factory()->create([
+            'color' => 'Amarillo',
+            'color_hex' => '#FFFF00',
+        ]);
+        Color::factory()->create([
+            'color' => 'Negro',
+            'color_hex' => '#000000',
+        ]);
+
         Size::factory(10)->create();
 
         /* Temporadas */

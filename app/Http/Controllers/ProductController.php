@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
@@ -25,9 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $colors = Color::all();
-        $sizes = Size::all();
-        $seasons = Season::all();
+        $colors = Color::where('status', 1)->get();
+        $sizes = Size::where('status', 1)->get();
+        $seasons = Season::where('status', 1)->get();
 
         return view('products.create', compact('colors', 'sizes', 'seasons'));
     }
@@ -35,11 +36,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         Product::create($request->all());
 
-        return redirect()->route('products.index');
+        return to_route('products.index')->with('status', __('El producto se ha creado correctamente.'));
     }
 
     /**
@@ -55,7 +56,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        $colors = Color::where('status', 1)->get();
+        $sizes = Size::where('status', 1)->get();
+        $seasons = Season::where('status', 1)->get();
+
+        return view('products.edit',  compact('product', 'colors', 'sizes', 'seasons'));
     }
 
     /**
@@ -63,14 +69,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update($request->all());
+        return to_route('products.index')->with('status', __('El producto se ha editado correctamente.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update(['status' => $request->input('status') ? 0 : 1]);
+        
+        if($request->input('status')){
+            return to_route('products.index')->with('status', __('El producto se ha inactivado correctamente..'));
+        }else{
+            return to_route('products.index')->with('status', __('El producto se ha activado correctamente.'));
+        }
     }
 }

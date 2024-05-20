@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeasonRequest;
 use App\Models\Season;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,11 @@ class SeasonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SeasonRequest $request)
     {
         Season::create($request->all());
 
-        return redirect()->route('seasons.index');
+        return to_route('seasons.index')->with('status', __('La temporada se ha creado correctamente.'));
     }
 
     /**
@@ -48,22 +49,32 @@ class SeasonController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $season = Season::find($id);
+        return view('seasons.edit', compact('season'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SeasonRequest $request, string $id)
     {
-        //
+        $season = Season::find($id);
+        $season->update($request->all());
+        return to_route('seasons.index')->with('status', __('La temporada se ha editado correctamente.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $season = Season::find($id);
+        $season->update(['status' => $request->input('status') ? 0 : 1]);
+        
+        if($request->input('status')){
+            return to_route('seasons.index')->with('status', __('La temporada se ha inactivado correctamente..'));
+        }else{
+            return to_route('seasons.index')->with('status', __('La temporada se ha activado correctamente.'));
+        }
     }
 }
