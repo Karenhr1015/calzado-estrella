@@ -11,9 +11,15 @@ class SizeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sizes = Size::latest()->paginate();
+        $query = Size::query();
+
+        if ($request->has('value')) {
+            $query->where('value', 'like', '%' . $request->input('value') . '%');
+        }
+
+        $sizes = $query->latest()->paginate();
 
         return view('sizes.index', compact('sizes'));
     }
@@ -70,10 +76,10 @@ class SizeController extends Controller
     {
         $size = Size::find($id);
         $size->update(['status' => $request->input('status') ? 0 : 1]);
-        
-        if($request->input('status')){
+
+        if ($request->input('status')) {
             return to_route('sizes.index')->with('status', __('La talla se ha inactivado correctamente..'));
-        }else{
+        } else {
             return to_route('sizes.index')->with('status', __('La talla se ha activado correctamente.'));
         }
     }

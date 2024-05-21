@@ -17,7 +17,13 @@
                     class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     {{-- Header Table --}}
                     <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
+                        <form class="flex items-center gap-3" action="{{ route('stocks.index') }}" method="GET">
+                            <a href="{{ route('stocks.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 512 512">
+                                    <path fill="#080640"
+                                        d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z" />
+                                </svg>
+                            </a>
                             <div class="relative w-full">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -27,10 +33,11 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <input type="text" id="simple-search"
+                                <input type="text" id="simple-search" name="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="{{ __('Search') }}" required="">
                             </div>
+                            <button type="submit"></button>
                         </form>
                     </div>
                     <div
@@ -72,8 +79,10 @@
                                         {{ $stock->product->name }} | Color:
                                         {{ $stock->product->color->color }} | Talla:
                                         {{ $stock->product->size->value }} | Temporada:
-                                        {{ $stock->product->season->name }}
+                                        {{ $stock->product->season->name }} | Tipo de producto:
+                                        {{ $stock->product->product_type->name }}
                                         | Precio: {{ $stock->product->price }}
+                                        | Precio mayorista: {{ $stock->product->wholesale_price }}
                                     </td>
                                     <td class="px-4 py-3"> {{ $stock->amount }} </td>
                                     <td class="px-4 py-3">

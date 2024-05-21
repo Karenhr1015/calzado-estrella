@@ -10,86 +10,77 @@
 
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4">
                     {{-- Historial de ventas --}}
-                    <a href="#"
-                        class="block max-w-sm border border-gray-200 shadow hover:bg-indigo-800 bg-indigo-900 p-2 rounded-lg">
-
-                        <div class="border-4 rounded-lg ">
-                            <div class="flex justify-center items-center text-white mb-7 mt-7">
-                                <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
-                                    class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="flex justify-center items-center mb-7 mt-7">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight dark:text-white text-white">Ver
-                                    Historial de Ventas</h5>
-                            </div>
-                        </div>
-                    </a>
-                    {{-- Gestionar catlago --}}
-                    <a href="{{route('products.index')}}"
-                        class="block max-w-sm border border-gray-200 shadow hover:bg-indigo-800 bg-indigo-900 p-2 rounded-lg">
-
-                        <div class="border-4 rounded-lg ">
-                            <div class="flex justify-center items-center text-white mb-7 mt-7">
-                                <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
-                                    class="w-40 h-40"s xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="flex justify-center items-center mb-7 mt-7">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight dark:text-white text-white">
-                                    Gestionar Catalogo</h5>
-                            </div>
-                        </div>
-                    </a>
+                    <x-card-link href="">
+                        <x-slot name="icon">
+                            <svg height="200px" width="200px" version="1.1" id="x32" class="w-40 h-40"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <style type="text/css">
+                                        .st0 {
+                                            fill: #ffffff;
+                                        }
+                                    </style>
+                                    <g>
+                                        <path class="st0"
+                                            d="M486.998,140.232c-8.924-12.176-22.722-19.878-37.785-21.078l-311.616-24.68l-5.665-32.094 c-5.179-29.305-28.497-51.998-57.932-56.352l-5.662-0.845L34.65,0.185c-9.385-1.378-18.118,5.09-19.51,14.475 c-1.395,9.393,5.086,18.127,14.471,19.514v-0.008l39.357,5.834l0.009,0.026c14.788,2.164,26.526,13.586,29.131,28.324 l53.338,302.302c5.005,28.375,29.647,49.047,58.461,49.056h219.192c9.49,0,17.176-7.694,17.176-17.172 c0-9.486-7.686-17.18-17.176-17.18H209.906c-12.133,0.009-22.536-8.725-24.642-20.672l-7.461-42.299h244.342 c24.189,0,45.174-16.691,50.606-40.262l22.967-99.523C499.118,167.887,495.93,152.424,486.998,140.232z">
+                                        </path>
+                                        <path class="st0"
+                                            d="M223.012,438.122c-20.402,0-36.935,16.554-36.935,36.948c0,20.394,16.533,36.931,36.935,36.931 c20.401,0,36.944-16.537,36.944-36.931C259.955,454.676,243.413,438.122,223.012,438.122z">
+                                        </path>
+                                        <path class="st0"
+                                            d="M387.124,438.122c-20.406,0-36.935,16.554-36.935,36.948c0,20.394,16.529,36.931,36.935,36.931 c20.402,0,36.944-16.537,36.944-36.931C424.068,454.676,407.526,438.122,387.124,438.122z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </x-slot>
+                        Historial de Ventas
+                    </x-card-link>
+                    {{-- Gestionar catalago --}}
+                    <x-card-link href="{{ route('products.dashboard') }}">
+                        <x-slot name="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-40 h-40" viewBox="0 0 512 512">
+                                <path fill="#ffffff"
+                                    d="M448 480H64c-35.3 0-64-28.7-64-64V192H512V416c0 35.3-28.7 64-64 64zm64-320H0V96C0 60.7 28.7 32 64 32H192c20.1 0 39.1 9.5 51.2 25.6l19.2 25.6c6 8.1 15.5 12.8 25.6 12.8H448c35.3 0 64 28.7 64 64z" />
+                            </svg>
+                        </x-slot>
+                        Gestionar Catalogo
+                    </x-card-link>
                     {{-- Ver solicitudes mayoristas --}}
-                    <a href="#"
-                        class="block max-w-sm border border-gray-200 shadow hover:bg-indigo-800 bg-indigo-900 p-2 rounded-lg">
-
-                        <div class="border-4 rounded-lg ">
-                            <div class="flex justify-center items-center text-white mb-7 mt-7">
-                                <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
-                                    class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">
-                                    <path clip-rule="evenodd"
-                                        d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z"
-                                        fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div class="flex justify-center items-center mb-7 mt-7">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight dark:text-white text-white">Ver
-                                    Solicitudes Mayoristas </h5>
-                            </div>
-                        </div>
-                    </a>
+                    <x-card-link href="">
+                        <x-slot name="icon">
+                            <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
+                                class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd"
+                                    d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </x-slot>
+                        Ver Mayoristas
+                    </x-card-link>
                     {{-- Gestionar inventario --}}
-                    <a href="{{route('stocks.index')}}"
-                        class="block max-w-sm border border-gray-200 shadow hover:bg-indigo-800 bg-indigo-900 p-2 rounded-lg">
-
-                        <div class="border-4 rounded-lg ">
-                            <div class="flex justify-center items-center text-white mb-7 mt-7">
-                                <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" class="w-40 h-40"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path clip-rule="evenodd"
-                                        d="M5.478 5.559A1.5 1.5 0 0 1 6.912 4.5H9A.75.75 0 0 0 9 3H6.912a3 3 0 0 0-2.868 2.118l-2.411 7.838a3 3 0 0 0-.133.882V18a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-4.162c0-.299-.045-.596-.133-.882l-2.412-7.838A3 3 0 0 0 17.088 3H15a.75.75 0 0 0 0 1.5h2.088a1.5 1.5 0 0 1 1.434 1.059l2.213 7.191H17.89a3 3 0 0 0-2.684 1.658l-.256.513a1.5 1.5 0 0 1-1.342.829h-3.218a1.5 1.5 0 0 1-1.342-.83l-.256-.512a3 3 0 0 0-2.684-1.658H3.265l2.213-7.191Z"
-                                        fill-rule="evenodd"></path>
-                                    <path clip-rule="evenodd"
-                                        d="M12 2.25a.75.75 0 0 1 .75.75v6.44l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 0 1 1.06-1.06l1.72 1.72V3a.75.75 0 0 1 .75-.75Z"
-                                        fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div class="flex justify-center items-center mb-7 mt-7">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight dark:text-white text-white">Gestionar
-                                    Inventario</h5>
-                            </div>
-                        </div>
-                    </a>
+                    <x-card-link href="{{ route('stocks.index') }}">
+                        <x-slot name="icon">
+                            <svg height="200px" width="200px" version="1.1" id="Capa_1" class="w-40 h-40"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 56.93 56.93" xml:space="preserve" fill="#ffffff" stroke="#ffffff">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path style="fill:#ffffff;"
+                                            d="M48.654,40.217l-11.771,5.697l-4.547-9.395l11.771-5.697L48.654,40.217z M45.801,16.3l9.722,20.089 l-5.885,2.848l-9.723-20.088L45.801,16.3z M40.618,47.512l16.312-7.604l-0.381-1.603L38.864,46.51 c-0.838-0.271-1.756-0.332-2.675-0.11c-0.16,0.037-0.317,0.084-0.471,0.135L23.575,23.577c1.507-1.646,0.112-5.235-2.842-4.859 c-0.291,0.037-0.396,0.068-0.603,0.087c-2.797-0.194-5.6-1.117-8.139-2.459c-0.016-0.294-0.028-0.587-0.045-0.881 c-0.148-2.42-1.555-4.553-4.191-4.704c-2.205-0.126-4.852,1.764-4.704,4.191c0.35,5.73,0.346,7.134,0.328,12.627l-0.057-0.002 c0.035,0.73,0.069,1.94,0.107,2.672c0.055,1.136,0.455,2.048,1.053,2.735c0.005,0.008,0.006,0.02,0.013,0.026 c0.707,1.087,0.65,2.241,1.215,3.403c-1.043,4.955-4.331,9.906-5.605,14.812c-0.934,3.603,4.624,5.127,5.558,1.532 c1.284-4.941,5.213-9.938,6.266-14.934c0.054-0.254,0.073-0.498,0.069-0.729c3.46,3.575,5.784,9.387,6.221,14.463 c0.316,3.678,6.082,3.706,5.764,0c-0.729-8.468-5.046-16.685-11.671-21.777c-0.021-0.426-0.041-0.854-0.062-1.278l0.022,0.002 c0.01-3.447,0.018-2.288-0.05-5.734c2.385,0.913,4.895,1.494,7.413,1.687l-0.004,0.07c0.894-0.007,1.467-0.071,2.35-0.183 c0.164-0.021,0.307-0.063,0.451-0.104l11.761,23.151c-1.419,1.167-2.139,3.076-1.686,4.979c0.631,2.662,3.312,4.312,5.977,3.682 c2.662-0.634,4.312-3.314,3.68-5.977C41.918,49.043,41.36,48.164,40.618,47.512z M37.722,52.854 c-0.898,0.213-1.803-0.344-2.016-1.24c-0.214-0.897,0.344-1.804,1.24-2.017c0.896-0.214,1.803,0.345,2.016,1.241 C39.175,51.737,38.62,52.64,37.722,52.854z M38.93,20.127l4.548,9.395l-11.771,5.697l-4.548-9.394L38.93,20.127z M7.667,0.745 c2.392,0,4.331,1.939,4.331,4.331s-1.939,4.331-4.331,4.331S3.336,7.468,3.336,5.076S5.275,0.745,7.667,0.745z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </x-slot>
+                        Gestionar Inventario
+                    </x-card-link>
                 </div>
-
             </div>
         </div>
     </section>

@@ -23,6 +23,8 @@ return new class extends Migration
                 ->constrained();
             $table->foreignId('size_id')
                 ->constrained();
+            $table->foreignId('product_type_id')
+                ->constrained();
             $table->foreignId('season_id')
                 ->constrained();
             $table->timestamps();

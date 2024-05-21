@@ -11,9 +11,15 @@ class SeasonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $seasons = Season::latest()->paginate();
+        $query = Season::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        $seasons = $query->latest()->paginate();
 
         return view('seasons.index', compact('seasons'));
     }

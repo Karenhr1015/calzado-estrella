@@ -1,4 +1,25 @@
-<div id="carouselExampleIndicators" class="h-[200px] md:h-[440px] flex px-10" data-twe-carousel-init data-twe-ride="carousel">
+@php
+    $imgs = [
+        [
+            'name' => 'Black_friday.jpg',
+        ],
+        [
+            'name' => 'black-friday.jpg',
+        ],
+        [
+            'name' => 'Halloween.png',
+        ],
+        [
+            'name' => 'Mothers_day.jpg',
+        ],
+        [
+            'name' => 'Valentines_day.jpg',
+        ],
+    ];
+@endphp
+
+<div id="carouselExampleIndicators" class="h-[200px] md:h-[440px] flex px-10" data-twe-carousel-init
+    data-twe-ride="carousel">
     {{-- <!--Carousel indicators-->
     <div class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
         data-twe-carousel-indicators>
@@ -15,20 +36,32 @@
 
     <!--Carousel items-->
     <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+        @foreach ($imgs as $img)
+        @endforeach
         <!--First item-->
         <div class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
             data-twe-carousel-item data-twe-carousel-active>
-            <img src="{{ asset('img/carousel/carousel_1.webp') }}" class="block w-full" alt="Wild Landscape" />
+            <img src="{{ asset('img/carousel/Black_friday.jpg') }}" class="block w-full" alt="Wild Landscape" />
         </div>
         <!--Second item-->
         <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
             data-twe-carousel-item>
-            <img src="{{ asset('img/carousel/carousel_2.webp') }}" class="block w-full" alt="Camera" />
+            <img src="{{ asset('img/carousel/black-friday.jpg') }}" class="block w-full" alt="Camera" />
         </div>
         <!--Third item-->
         <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
             data-twe-carousel-item>
-            <img src="{{ asset('img/carousel/carousel_3.webp') }}" class="block w-full" alt="Exotic Fruits" />
+            <img src="{{ asset('img/carousel/Halloween.png') }}" class="block w-full" alt="Exotic Fruits" />
+        </div>
+        <!--Four item-->
+        <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+            data-twe-carousel-item>
+            <img src="{{ asset('img/carousel/Mothers_day.jpg') }}" class="block w-full" alt="Exotic Fruits" />
+        </div>
+        <!--Five item-->
+        <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+            data-twe-carousel-item>
+            <img src="{{ asset('img/carousel/Valentines_day.jpg') }}" class="block w-full" alt="Exotic Fruits" />
         </div>
     </div>
 

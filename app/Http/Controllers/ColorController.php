@@ -11,9 +11,15 @@ class ColorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $colors = Color::latest()->paginate();
+        $query = Color::query();
+
+        if ($request->has('color')) {
+            $query->where('color', 'like', '%' . $request->input('color') . '%');
+        }
+
+        $colors = $query->latest()->paginate();
 
         return view('colors.index', compact('colors'));
     }
@@ -70,10 +76,10 @@ class ColorController extends Controller
     {
         $color = Color::find($id);
         $color->update(['status' => $request->input('status') ? 0 : 1]);
-        
-        if($request->input('status')){
+
+        if ($request->input('status')) {
             return to_route('colors.index')->with('status', __('The color has been disabled successfully.'));
-        }else{
+        } else {
             return to_route('colors.index')->with('status', __('The color has been enable successfully.'));
         }
     }

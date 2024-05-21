@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Color;
+use App\Models\ProductType;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Season;
@@ -29,7 +30,7 @@ class DatabaseSeeder extends Seeder
         Role::factory()->create([
             'name' => 'Mayorista',
         ]);
-        
+
         /* Usuario Admin */
         User::factory()->create([
             'name' => 'admin',
@@ -39,11 +40,11 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-       
+
         User::factory(15)->create();
-        
+
         /* Gestionar Catalogo */
-    
+
         Color::factory()->create([
             'color' => 'Rojo',
             'color_hex' => '#FF0000',
@@ -83,5 +84,11 @@ class DatabaseSeeder extends Seeder
         Season::factory()->create([
             'name' => 'Dia del Padre',
         ]);
+
+        /* Tipos de productos */
+        ProductType::factory()->create(['name' => 'Hombre',]);
+        ProductType::factory()->create(['name' => 'Mujer',]);
+        ProductType::factory()->create(['name' => 'Niño',]);
+        ProductType::factory()->create(['name' => 'Niña',]);
     }
 }

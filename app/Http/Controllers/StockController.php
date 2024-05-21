@@ -12,9 +12,17 @@ class StockController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $stocks = Stock::latest()->paginate();
+        $query = Stock::query();
+
+        if ($request->has('name')) {
+            $query->whereHas('product', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->input('name') . '%');
+            });
+        }
+
+        $stocks = $query->latest()->paginate();
 
         return view('stocks.index', compact('stocks'));
     }
@@ -75,10 +83,10 @@ class StockController extends Controller
     {
         $stock = Stock::find($id);
         $stock->update(['status' => $request->input('status') ? 0 : 1]);
-        
-        if($request->input('status')){
+
+        if ($request->input('status')) {
             return to_route('stocks.index')->with('status', __('El producto en el inventario se ha inactivado correctamente..'));
-        }else{
+        } else {
             return to_route('stocks.index')->with('status', __('El producto en el inventario se ha activado correctamente.'));
         }
     }

@@ -46,9 +46,9 @@
                             <x-dropdown-link :href="route('users.index')">
                                 {{ __('Users') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('users.index')">
+                            {{-- <x-dropdown-link :href="route('users.index')">
                                 {{ __('Clients') }}
-                            </x-dropdown-link>
+                            </x-dropdown-link> --}}
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -121,7 +121,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Cerrar sesión ') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

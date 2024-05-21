@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Season;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,9 +15,15 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate();
+        $query = Product::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        $products = $query->latest()->paginate();
 
         return view('products.index', compact('products'));
     }
@@ -29,8 +36,10 @@ class ProductController extends Controller
         $colors = Color::where('status', 1)->get();
         $sizes = Size::where('status', 1)->get();
         $seasons = Season::where('status', 1)->get();
+        $seasons = Season::where('status', 1)->get();
+        $product_types = ProductType::all();
 
-        return view('products.create', compact('colors', 'sizes', 'seasons'));
+        return view('products.create', compact('colors', 'sizes', 'seasons', 'product_types'));
     }
 
     /**
@@ -87,5 +96,10 @@ class ProductController extends Controller
         }else{
             return to_route('products.index')->with('status', __('El producto se ha activado correctamente.'));
         }
+    }
+
+    public function dashboard()
+    {
+        return view('products.dashboard');
     }
 }

@@ -53,6 +53,19 @@
                     <x-input-error :messages="$errors->get('size_id')" class="mt-2" />
                 </div>
 
+                {{-- Tipo de producto --}}
+                <div class="mb-5">
+                    <x-input-label for="product_type_id" :value="__('Tipo de producto')" />
+                    <x-select id="product_type_id" name="product_type_id">
+                        @foreach ($product_types as $product_type)
+                            <option value="{{ $product_type->id }}" {{ $product_type->id == old('product_type_id') ? 'selected' : '' }}>
+                                {{ $product_type->name }}</option>
+                        @endforeach
+                    </x-select>
+                    {{-- Talla Validacion --}}
+                    <x-input-error :messages="$errors->get('product_type_id')" class="mt-2" />
+                </div>
+
                 {{-- Temporada --}}
                 <div class="mb-5">
                     <x-input-label for="season_id" :value="__('Temporada')" />

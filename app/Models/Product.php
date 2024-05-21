@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'name', 'color_id', 'size_id', 'season_id', 'price', 'wholesale_price', 'description', 'status'
+        'code', 'name', 'color_id', 'size_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status'
     ];
 
     /* Mutadores */
@@ -41,6 +41,12 @@ class Product extends Model
     public function season()
     {
         return $this->belongsTo(season::class);
+    }
+
+    /* Relacion Muchos a uno */
+    public function product_type()
+    {
+        return $this->belongsTo(ProductType::class);
     }
 
     /* Relacion uno a uno */
