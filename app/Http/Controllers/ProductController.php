@@ -69,8 +69,9 @@ class ProductController extends Controller
         $colors = Color::where('status', 1)->get();
         $sizes = Size::where('status', 1)->get();
         $seasons = Season::where('status', 1)->get();
+        $product_types = ProductType::all();
 
-        return view('products.edit',  compact('product', 'colors', 'sizes', 'seasons'));
+        return view('products.edit',  compact('product', 'colors', 'sizes', 'seasons', 'product_types'));
     }
 
     /**

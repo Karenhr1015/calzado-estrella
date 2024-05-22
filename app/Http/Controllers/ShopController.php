@@ -25,6 +25,12 @@ class ShopController extends Controller
         return view('shop.index', compact('stocks'));
     }
 
+    public function view($id)
+    {
+        $stock = Stock::findOrFail($id);
+        return view('shop.view', compact('stock'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

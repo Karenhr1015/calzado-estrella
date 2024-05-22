@@ -13,6 +13,7 @@ use App\Models\Product;
 
 /* Rutas para la Tienda */
 Route::get('/', [ShopController::class, 'index'])->name('raiz');
+Route::get('/view/{id}', [ShopController::class, 'view'])->name('shop.view');
 // Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 /* Rutas con Autentificacion */

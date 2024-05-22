@@ -36,7 +36,8 @@
                     <x-select id="color_id" name="color_id">
                         @foreach ($colors as $color)
                             <option value="{{ $color->id }}"
-                                {{ $color->id == $product->color_id ? 'selected' : '' }}>{{ $color->color }}</option>
+                                {{ $color->id == old('color_id', $product->color_id) ? 'selected' : '' }}>
+                                {{ $color->color }}</option>
                         @endforeach
                     </x-select>
                     {{-- Color Validacion --}}
@@ -49,11 +50,26 @@
                     <x-select id="size_id" name="size_id">
                         @foreach ($sizes as $size)
                             <option value="{{ $size->id }}"
-                                {{ $size->id == $product->size_id ? 'selected' : '' }}>{{ $size->value }}</option>
+                                {{ $size->id == old('size_id', $product->size_id) ? 'selected' : '' }}>
+                                {{ $size->value }}</option>
                         @endforeach
                     </x-select>
                     {{-- Talla Validacion --}}
                     <x-input-error :messages="$errors->get('size_id')" class="mt-2" />
+                </div>
+
+                {{-- Tipo de producto --}}
+                <div class="mb-5">
+                    <x-input-label for="product_type_id" :value="__('Tipo de producto')" />
+                    <x-select id="product_type_id" name="product_type_id">
+                        @foreach ($product_types as $product_type)
+                            <option value="{{ $product_type->id }}"
+                                {{ $product_type->id == old('product_type_id', $product->product_type->id) ? 'selected' : '' }}>
+                                {{ $product_type->name }}</option>
+                        @endforeach
+                    </x-select>
+                    {{-- Talla Validacion --}}
+                    <x-input-error :messages="$errors->get('product_type_id')" class="mt-2" />
                 </div>
 
                 {{-- Temporada --}}
@@ -62,7 +78,7 @@
                     <x-select id="season_id" name="season_id">
                         @foreach ($seasons as $season)
                             <option value="{{ $season->id }}"
-                                {{ $season->id == $product->season_id ? 'selected' : '' }}>{{ $season->name }}
+                                {{ $season->id == old('season_id', $product->season_id) ? 'selected' : '' }}>{{ $season->name }}
                             </option>
                         @endforeach
                     </x-select>
@@ -88,10 +104,11 @@
                     <x-input-error :messages="$errors->get('wholesale_price')" class="mt-2" />
                 </div>
 
-                 {{-- Descripcion --}}
-                 <div class="mb-5">
+                {{-- Descripcion --}}
+                <div class="mb-5">
                     <x-input-label for="description" :value="__('Descripcion')" />
-                    <textarea name="description" id="description" cols="30" rows="10" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <textarea name="description" id="description" cols="30" rows="10"
+                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             {{ old('description', $product->description) }}
                     </textarea>
                     {{-- Precio Validacion --}}
