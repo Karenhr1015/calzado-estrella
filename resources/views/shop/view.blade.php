@@ -22,19 +22,19 @@
         <div class="container mx-auto p-2">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen">
                 <!-- First Column with Image -->
-                <div class="bg-gray-300 flex items-center justify-center">
+                <div class="bg-gray-200 flex items-center justify-center">
                     <div style="width: 27%" class="p-5 flex gap-5 flex-col h-[100%]">
-                        <img src="{{ asset('img/products/producto1.jpg') }}" alt="Placeholder Image"
+                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="Placeholder Image"
                             class="object-cover w-full h-full">
-                        <img src="{{ asset('img/products/producto1.jpg') }}" alt="Placeholder Image"
+                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="Placeholder Image"
                             class="object-cover w-full h-full">
-                        <img src="{{ asset('img/products/producto1.jpg') }}" alt="Placeholder Image"
+                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="Placeholder Image"
                             class="object-cover w-full h-full">
-                        <img src="{{ asset('img/products/producto1.jpg') }}" alt="Placeholder Image"
+                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="Placeholder Image"
                             class="object-cover w-full h-full">
                     </div>
                     <div style="width: 100%; height: 100%;">
-                        <img src="{{ asset('img/products/producto1.jpg') }}" alt="Placeholder Image"
+                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="Placeholder Image"
                             class="object-cover w-full h-full">
                     </div>
                 </div>
@@ -70,8 +70,12 @@
                     </div>
                     <div style="width: 100%" class="text-2xl ml-12 flex flex-col gap-7">
                         <strong>Colores</strong>
-                        <div class="w-8 h-8 border-2 rounded-full"
-                            style="border-radius: 9999px;background-color:{{ $stock->product->color->color_hex }};">
+                        <div class="flex space-x-2">
+                            @foreach ($stock->product->colors as $color)
+                                <div class="w-8 h-8 border-2 rounded-full"
+                                    style="border-radius: 9999px;background-color:{{ $color->color_hex }};">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     </p>

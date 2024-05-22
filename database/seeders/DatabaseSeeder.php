@@ -86,6 +86,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         /* Tipos de productos */
+        ProductType::factory()->create(['name' => 'Unisex',]);
         ProductType::factory()->create(['name' => 'Hombre',]);
         ProductType::factory()->create(['name' => 'Mujer',]);
         ProductType::factory()->create(['name' => 'Niño',]);

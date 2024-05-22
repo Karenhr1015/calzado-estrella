@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('wholesale_price');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('photo')->nullable();
             $table->boolean('status')->default(1);
-            $table->foreignId('color_id')
-                ->constrained();
+            /* $table->foreignId('color_id')
+                ->constrained(); */
             $table->foreignId('size_id')
                 ->constrained();
             $table->foreignId('product_type_id')

@@ -9,6 +9,7 @@ use App\Models\Size;
 use App\Models\Season;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -23,7 +24,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        $products = $query->latest()->paginate();
+        $products = $query->with('colors')->latest()->paginate();
 
         return view('products.index', compact('products'));
     }
@@ -47,9 +48,24 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        Product::create($request->all());
+        /* Obtener los datos validados */
+        $validatedData = $request->validated();
 
-        return to_route('products.index')->with('status', __('El producto se ha creado correctamente.'));
+        /* Validar la existencia de una foto en la peticion */
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('products', 'public');
+            $validatedData['photo'] = $photoPath;
+        }
+
+        /* Crear el producto */
+        $product = Product::create($validatedData);
+        $product->save();
+
+        /* Syncronizar colores */
+        $product->colors()->syncWithoutDetaching($request->color_ids);
+
+        /* Redireccionar a la vista de productos */
+        return redirect()->route('products.index')->with('status', 'El producto se ha creado correctamente.');
     }
 
     /**
@@ -65,7 +81,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::with('colors')->find($id);
         $colors = Color::where('status', 1)->get();
         $sizes = Size::where('status', 1)->get();
         $seasons = Season::where('status', 1)->get();
@@ -79,9 +95,34 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, string $id)
     {
+        /* Obtener el producto */
         $product = Product::find($id);
-        $product->update($request->all());
-        return to_route('products.index')->with('status', __('El producto se ha editado correctamente.'));
+        
+        /* Obtener los datos validados */
+        $validatedData = $request->validated();
+
+        /* Validar la existencia de una foto en la petición */
+        if ($request->hasFile('photo')) {
+            /* Eliminar la foto anterior si existe */
+            if ($product->photo) {
+                Storage::delete($product->photo);
+            }
+
+            /* Subir y guardar la nueva foto */
+            $photoPath = $request->file('photo')->store('products', 'public');
+            $validatedData['photo'] = $photoPath;
+        } else {
+            /* Conservar la foto existente si no se envía una nueva */
+            $validatedData['photo'] = $product->photo;
+        }
+
+        /* Actualizar el producto con los datos validados */
+        $product->update($validatedData);
+
+        /* Sincronizar colores */
+        $product->colors()->syncWithoutDetaching($request->color_ids);
+
+        return redirect()->route('products.index')->with('status', __('El producto se ha editado correctamente.'));
     }
 
     /**
@@ -91,10 +132,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->update(['status' => $request->input('status') ? 0 : 1]);
-        
-        if($request->input('status')){
+
+        if ($request->input('status')) {
             return to_route('products.index')->with('status', __('El producto se ha inactivado correctamente..'));
-        }else{
+        } else {
             return to_route('products.index')->with('status', __('El producto se ha activado correctamente.'));
         }
     }

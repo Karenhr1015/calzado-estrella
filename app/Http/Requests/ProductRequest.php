@@ -24,40 +24,78 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         /* Season_id para validaciones */
-        /* if ($this->route('product')) {
-            $product_id = ',' . $this->route('product');
-        } else {
-            $product_id = '';
-        }
- */
-        /* Season_id para validaciones */
         $productId = $this->route('product') ? $this->route('product') : null;
 
-        return [
+        $rules = [
+            /* name */
             'name' => ['required', new UniqueProductAttributes($productId)],
+            /* code */
             'code' => [
                 'nullable',
                 Rule::unique('products', 'code')->ignore($productId)->where(function ($query) {
                     return $query->whereNotNull('code');
                 })
             ],
-            'price' => 'required|integer|min:0',
-            'wholesale_price' => 'required|integer|min:0',
-            'color_id' => 'exists:colors,id',
-            'size_id' => 'exists:sizes,id',
-            'season_id' => 'exists:seasons,id',
+            /* price */
+            'price' => 'required|numeric|min:0',
+            /* wholesale_price */
+            'wholesale_price' => 'required|numeric|min:0',
+            /* size_id */
+            'size_id' => 'required|exists:sizes,id',
+            /* season_id */
+            'season_id' => 'required|exists:seasons,id',
+            /* product_type_id */
+            'product_type_id' => 'required|exists:product_types,id',
+            /* description */
+            'description' => 'nullable|string',
+            /* photo */
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
+
+        if ($this->isMethod('POST')) {
+            $rules['color_ids'] = [
+                'required',
+                'array',
+                'min:1',
+                Rule::exists('colors', 'id'),
+            ];
+        }
+
+        return $rules;
     }
 
     public function messages()
     {
         return [
+            /* name */
             'name.required' => 'El campo referencia es obligatorio.',
-            'wholesale_price.required' => 'El campo precio mayorista es obligatorio.',
-            'code.unique' => 'El codigo ya existe.',
-            'color_id.exists' => 'El color seleccionado no existe.',
-            'size_id.exists' => 'La talla seleccionada no existe.',
-            'season_id.exists' => 'La temporada seleccionada no existe.',
+            /* Colors */
+            'color_ids.required' => 'Seleccione al menos un color.',
+            'color_ids.array' => 'Los colores seleccionados deben estar en formato de array.',
+            'color_ids.min' => 'Seleccione al menos un color.',
+            /* price */
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser numérico.',
+            'price.min' => 'El precio debe ser mayor o igual a :min.',
+            /* wholesale_price */
+            'wholesale_price.required' => 'El precio mayorista es obligatorio.',
+            'wholesale_price.numeric' => 'El precio mayorista debe ser numérico.',
+            'wholesale_price.min' => 'El precio mayorista debe ser mayor o igual a :min.',
+            /* size_id */
+            'size_id.required' => 'La talla es obligatoria.',
+            'size_id.exists' => 'La talla seleccionada no es válida.',
+            /* season_id */
+            'season_id.required' => 'La temporada es obligatoria.',
+            'season_id.exists' => 'La temporada seleccionada no es válida.',
+            /* product_type_id */
+            'product_type_id.required' => 'El tipo de producto es obligatorio.',
+            'product_type_id.exists' => 'El tipo de producto seleccionado no es válido.',
+            /* description */
+            'description.string' => 'La descripción debe ser una cadena de caracteres.',
+            /* photo */
+            'photo.image' => 'El archivo debe ser una imagen.',
+            'photo.mimes' => 'La imagen debe ser de tipo: :values.',
+            'photo.max' => 'La imagen no debe ser mayor de :max KB.',
         ];
     }
 }

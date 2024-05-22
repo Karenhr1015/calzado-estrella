@@ -59,9 +59,10 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">{{ __('Id') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Imagen') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Codigo') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Referencia') }}</th>
-                                <th scope="col" colspan="2" class="px-4 py-3">{{ __('Color') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Colores') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Talla') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Tipo de Producto') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Temporada') }}</th>
@@ -80,12 +81,19 @@
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $product->id }}
                                     </th>
+                                    <td class="px-4 py-3">
+                                        <img src="{{ asset('storage/' . $product->photo) }}"
+                                            alt="">
+                                    </td>
                                     <td class="px-4 py-3">{{ $product->code }}</td>
                                     <td class="px-4 py-3">{{ $product->name }}</td>
-                                    <td class="px-4 py-3">{{ $product->color->color }}</td>
-                                    <td class="px-4 py-3">
-                                        <div class="w-6 h-6 border-2 border-black-200"
-                                            style="background-color:{{ $product->color->color_hex }};"></div>
+                                    <td class="px-4 py-2">
+                                        <div class="flex space-x-2">
+                                            @foreach ($product->colors as $color)
+                                                <div class="w-6 h-6 border-2 border-black-200"
+                                                    style="background-color:{{ $color->color_hex }};"></div>
+                                            @endforeach
+                                        </div>
                                     </td>
                                     <td class="px-4 py-3">{{ $product->size->value }}</td>
                                     <td class="px-4 py-3">{{ $product->product_type->name }}</td>
@@ -94,7 +102,7 @@
                                     <td class="px-4 py-3">{{ $product->wholesale_price }}</td>
                                     <td class="px-4 py-3">
                                         <button
-                                            onclick="popDescription('{{ $product->description }}', '{{ $product->name }}', '{{ $product->code }}', '{{ $product->color->color }}', '{{ $product->size->value }}', '{{ $product->season->name }}')">
+                                            onclick="popDescription('{{ $product->description }}', '{{ $product->name }}', '{{ $product->code }}', '{{ $product->size->value }}', '{{ $product->season->name }}')">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                 viewBox="0 0 576 512">
                                                 <path fill="#080640"
@@ -147,9 +155,9 @@
 </x-app-layout>
 
 <script>
-    function popDescription(text, name, code, color, talla, temporada) {
+    function popDescription(text, name, code, talla, temporada) {
         Swal.fire({
-            title: `Producto: (${code}) ${name} | Color: ${color} | Talla: ${talla} | Temporada: ${temporada}`,
+            title: `Producto: (${code}) ${name} | Talla: ${talla} | Temporada: ${temporada}`,
             text: text,
             confirmButtonText: 'Cerrar',
         });

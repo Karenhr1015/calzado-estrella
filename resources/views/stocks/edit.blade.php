@@ -1,30 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Editar producto del Inventario') }} : ({{ $stock->product->code }})
-            {{ $stock->product->name }} | Color:
-            {{ $stock->product->color->color }} | Talla: {{ $stock->product->size->value }} | Temporada:
-            {{ $stock->product->season->name }}
-            | Precio: {{ $stock->product->price }} | Cantidad: {{ $stock->amount }}
-        </h2>
+        <div class="flex justify-evenly">
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    {{ __('Editar Producto') }} : ({{ $stock->product->code }}) {{ $stock->product->name }}
+                </h2>
+                <br>
+                <div class="flex space-x-2">
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Colores:
+                    </h2>
+                    @foreach ($stock->product->colors as $color)
+                        <div class="w-6 h-6 border-2 border-black-200" style="background-color:{{ $color->color_hex }};">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="px-4 py-3">
+                <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="" class="w-40 h-40">
+            </div>
+        </div>
     </x-slot>
     <div class="py-12">
         <form class="max-w-sm mx-auto" action="{{ route('stocks.update', $stock->id) }}" method="POST">
             @csrf
             @method('PUT')
-            {{-- Producto --}}
-            <div class="mb-5">
-                <x-input-label for="product_id" :value="__('Producto')" />
-                <x-select id="product_id" name="product_id">
-                    @foreach ($products as $product)
-                        <option value="{{ $product->id }}" {{ $product->id == $stock->product_id ? 'selected' : '' }}>
-                            {{ $product->name }}</option>
-                    @endforeach
-                </x-select>
-                {{-- Producto Validacion --}}
-                <x-input-error :messages="$errors->get('product_id')" class="mt-2" />
-            </div>
-
             {{-- Cantidad disponible --}}
             <div class="mb-5">
                 <x-input-label for="amount" :value="__('Cantidad disponible')" />

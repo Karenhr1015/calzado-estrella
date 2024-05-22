@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'name', 'color_id', 'size_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status'
+        'code', 'name', 'color_id', 'size_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status', 'photo'
     ];
 
     /* Mutadores */
@@ -25,10 +25,10 @@ class Product extends Model
         );
     }
 
-    /* Relacion Muchos a uno */
-    public function color()
+    /* Relacion Muchos a Muchos */
+    public function colors()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsToMany(Color::class);
     }
 
     /* Relacion Muchos a uno */

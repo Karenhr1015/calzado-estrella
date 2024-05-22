@@ -41,7 +41,8 @@ class StockController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StockRequest $request)
-    {
+    {   
+        dd($request->all());
         Stock::create($request->all());
 
         return to_route('stocks.index')->with('status', __('El producto se ha agregado a inventario correctamente.'));

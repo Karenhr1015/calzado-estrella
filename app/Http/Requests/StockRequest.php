@@ -25,18 +25,19 @@ class StockRequest extends FormRequest
         /* Season_id para validaciones */
         $stockId = $this->route('stock') ? $this->route('stock') : null;
 
-        return [
-            /* 'product_id' => [
-                Rule::unique('stocks', 'product_id')->ignore($stockId)
-            ] */
-            'product_id' => [
+        $rules = [
+            'amount' => 'required|integer|min:0',
+        ];
+
+        if ($this->isMethod('POST')) {
+            $rules['product_id'] = [
                 'required',
                 'exists:products,id',
                 Rule::unique('stocks', 'product_id')->ignore($stockId),
-            ],
-            // 'product_id' => 'unique:stocks,product_id' . ($stockId ? ",{$stockId}" : ""),
-            'amount' => 'required|integer|min:0',
-        ];
+            ];
+        }
+
+        return $rules;
     }
 
     public function messages()

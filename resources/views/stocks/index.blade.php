@@ -59,7 +59,9 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">{{ __('Id') }}</th>
-                                <th scope="col" class="px-4 py-3">{{ __('producto') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Imagen') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Producto') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Colores') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Cantidad Disponible') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Estado') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Created_at') }}</th>
@@ -73,16 +75,25 @@
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $stock->id }}
                                     </th>
-
+                                    <td class="px-4 py-3">
+                                        <img src="{{ asset('storage/' . $stock->product->photo) }}" alt="">
+                                    </td>
                                     <td class="px-4 py-3">
                                         ({{ $stock->product->code }})
-                                        {{ $stock->product->name }} | Color:
-                                        {{ $stock->product->color->color }} | Talla:
+                                        {{ $stock->product->name }} Talla:
                                         {{ $stock->product->size->value }} | Temporada:
                                         {{ $stock->product->season->name }} | Tipo de producto:
                                         {{ $stock->product->product_type->name }}
                                         | Precio: {{ $stock->product->price }}
                                         | Precio mayorista: {{ $stock->product->wholesale_price }}
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="flex space-x-2">
+                                            @foreach ($stock->product->colors as $color)
+                                                <div class="w-6 h-6 border-2 border-black-200"
+                                                    style="background-color:{{ $color->color_hex }};"></div>
+                                            @endforeach
+                                        </div>
                                     </td>
                                     <td class="px-4 py-3"> {{ $stock->amount }} </td>
                                     <td class="px-4 py-3">

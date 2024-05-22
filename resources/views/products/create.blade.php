@@ -1,4 +1,9 @@
 <x-app-layout>
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
     {{-- Header --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -6,7 +11,7 @@
         </h2>
     </x-slot>
     <div class="py-12">
-        <form class="max-w-4xl mx-auto" action="{{ route('products.store') }}" method="POST">
+        <form class="max-w-4xl mx-auto" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- Codigo --}}
@@ -20,30 +25,35 @@
 
                 {{-- Referencia --}}
                 <div class="mb-5">
-                    <x-input-label for="name" :value="__('Referencia')" />
+                    <x-input-label for="name" :value="__('Nombre del producto')" />
                     <x-text-input id="name" class="block mt-1 w-full" name="name" :value="old('name')" autofocus
-                        autocomplete="name" :placeholder="__('Ingrese la referencia...')" />
+                        autocomplete="name" :placeholder="__('Ingrese el nombre del producto...')" />
                     {{-- Referencia Validacion --}}
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
-                {{-- Color --}}
+                {{-- Colores --}}
                 <div class="mb-5">
-                    <x-input-label for="color_id" :value="__('Color')" />
-                    <x-select id="color_id" name="color_id">
+                    <x-input-label for="color_ids" :value="__('Colores')" />
+                    <select id="color_ids" name="color_ids[]" multiple
+                        class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        <option></option>
                         @foreach ($colors as $color)
-                            <option value="{{ $color->id }}" {{ $color->id == old('color_id') ? 'selected' : '' }}>
-                                {{ $color->color }}</option>
+                            <option value="{{ $color->id }}"
+                                {{ in_array($color->id, old('color_ids', [])) ? 'selected' : '' }}>
+                                {{ $color->color }}
+                            </option>
                         @endforeach
-                    </x-select>
+                    </select>
                     {{-- Color Validacion --}}
-                    <x-input-error :messages="$errors->get('color_id')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('color_ids')" class="mt-2" />
                 </div>
 
                 {{-- Talla --}}
                 <div class="mb-5">
                     <x-input-label for="size_id" :value="__('Talla')" />
                     <x-select id="size_id" name="size_id">
+                        <option></option>
                         @foreach ($sizes as $size)
                             <option value="{{ $size->id }}" {{ $size->id == old('size_id') ? 'selected' : '' }}>
                                 {{ $size->value }}</option>
@@ -57,8 +67,10 @@
                 <div class="mb-5">
                     <x-input-label for="product_type_id" :value="__('Tipo de producto')" />
                     <x-select id="product_type_id" name="product_type_id">
+                        <option></option>
                         @foreach ($product_types as $product_type)
-                            <option value="{{ $product_type->id }}" {{ $product_type->id == old('product_type_id') ? 'selected' : '' }}>
+                            <option value="{{ $product_type->id }}"
+                                {{ $product_type->id == old('product_type_id') ? 'selected' : '' }}>
                                 {{ $product_type->name }}</option>
                         @endforeach
                     </x-select>
@@ -70,8 +82,10 @@
                 <div class="mb-5">
                     <x-input-label for="season_id" :value="__('Temporada')" />
                     <x-select id="season_id" name="season_id">
+                        <option></option>
                         @foreach ($seasons as $season)
-                            <option value="{{ $season->id }}" {{ $season->id == old('season_id') ? 'selected' : '' }}>
+                            <option value="{{ $season->id }}"
+                                {{ $season->id == old('season_id') ? 'selected' : '' }}>
                                 {{ $season->name }}</option>
                         @endforeach
                     </x-select>
@@ -100,11 +114,20 @@
                 {{-- Descripcion --}}
                 <div class="mb-5">
                     <x-input-label for="description" :value="__('Descripcion')" />
-                    <textarea name="description" id="description" cols="30" rows="10" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                            {{ old('description') }}
+                    <textarea name="description" id="description"
+                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            {{ old('description', '') }}
                     </textarea>
                     {{-- Precio Validacion --}}
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                </div>
+
+                {{-- Imagen --}}
+                <div class="mb-5">
+                    <x-input-label for="photo" :value="__('Foto del Producto')" />
+                    <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" />
+                    {{-- Talla Validacion --}}
+                    <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
 
             </div>
@@ -115,4 +138,12 @@
             </x-primary-button>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#color_ids').select2({
+                placeholder: "Seleccione los colores...",
+                allowClear: true
+            });
+        });
+    </script>
 </x-app-layout>
