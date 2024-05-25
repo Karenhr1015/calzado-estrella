@@ -37,7 +37,6 @@
                     <x-input-label for="color_ids" :value="__('Colores')" />
                     <select id="color_ids" name="color_ids[]" multiple
                         class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                        <option></option>
                         @foreach ($colors as $color)
                             <option value="{{ $color->id }}"
                                 {{ in_array($color->id, old('color_ids', [])) ? 'selected' : '' }}>
@@ -45,36 +44,37 @@
                             </option>
                         @endforeach
                     </select>
-                    {{-- Color Validacion --}}
+                    {{-- Colores Validacion --}}
                     <x-input-error :messages="$errors->get('color_ids')" class="mt-2" />
                 </div>
-
-                {{-- Talla --}}
+                
+                {{-- Tallas --}}
                 <div class="mb-5">
-                    <x-input-label for="size_id" :value="__('Talla')" />
-                    <x-select id="size_id" name="size_id">
-                        <option></option>
+                    <x-input-label for="sizes_ids" value="Tallas" />
+                    <select id="sizes_ids" name="sizes_ids[]" multiple
+                        class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                         @foreach ($sizes as $size)
-                            <option value="{{ $size->id }}" {{ $size->id == old('size_id') ? 'selected' : '' }}>
-                                {{ $size->value }}</option>
+                            <option value="{{ $size->id }}"
+                                {{ in_array($size->id, old('sizes_ids', [])) ? 'selected' : '' }}>
+                                {{ $size->value }}
+                            </option>
                         @endforeach
-                    </x-select>
-                    {{-- Talla Validacion --}}
-                    <x-input-error :messages="$errors->get('size_id')" class="mt-2" />
+                    </select>
+                    {{-- Tallas Validacion --}}
+                    <x-input-error :messages="$errors->get('sizes_ids')" class="mt-2" />
                 </div>
 
                 {{-- Tipo de producto --}}
                 <div class="mb-5">
                     <x-input-label for="product_type_id" :value="__('Tipo de producto')" />
                     <x-select id="product_type_id" name="product_type_id">
-                        <option></option>
                         @foreach ($product_types as $product_type)
                             <option value="{{ $product_type->id }}"
                                 {{ $product_type->id == old('product_type_id') ? 'selected' : '' }}>
                                 {{ $product_type->name }}</option>
                         @endforeach
                     </x-select>
-                    {{-- Talla Validacion --}}
+                    {{-- Tipo de producto Validacion --}}
                     <x-input-error :messages="$errors->get('product_type_id')" class="mt-2" />
                 </div>
 
@@ -82,7 +82,6 @@
                 <div class="mb-5">
                     <x-input-label for="season_id" :value="__('Temporada')" />
                     <x-select id="season_id" name="season_id">
-                        <option></option>
                         @foreach ($seasons as $season)
                             <option value="{{ $season->id }}"
                                 {{ $season->id == old('season_id') ? 'selected' : '' }}>
@@ -122,6 +121,15 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
+                {{-- Cantidad --}}
+                <div class="mb-5">
+                    <x-input-label for="amount" :value="__('Cantidad')" />
+                    <x-text-input id="amount" class="block mt-1 w-full" name="amount" :value="old('amount')"
+                        :placeholder="__('Ingrese la cantidad...')" type='number' min="0" />
+                    {{-- Cantidad Validacion --}}
+                    <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                </div>
+
                 {{-- Imagen --}}
                 <div class="mb-5">
                     <x-input-label for="photo" :value="__('Foto del Producto')" />
@@ -132,6 +140,12 @@
 
             </div>
 
+            {{-- Btn Cancelar --}}
+            <a href="{{ route('products.index') }}">
+                <x-secondary-button type="button" class="mt-4 bg-yellow-400">
+                    Cancelar
+                </x-secondary-button>
+            </a>
             {{-- Btn Submit --}}
             <x-primary-button type="submit" class="mt-4">
                 {{ __('Guardar') }}

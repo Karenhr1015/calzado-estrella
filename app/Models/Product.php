@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'name', 'color_id', 'size_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status', 'photo'
+        'code', 'name', 'color_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status', 'amount', 'photo'
     ];
 
     /* Mutadores */
@@ -28,13 +28,14 @@ class Product extends Model
     /* Relacion Muchos a Muchos */
     public function colors()
     {
-        return $this->belongsToMany(Color::class);
+        return $this->belongsToMany(Color::class)->withTimestamps();
     }
 
-    /* Relacion Muchos a uno */
-    public function size()
+
+    /* Relacion Muchos a Muchos */
+    public function sizes()
     {
-        return $this->belongsTo(size::class);
+        return $this->belongsToMany(Size::class)->withTimestamps();
     }
 
     /* Relacion Muchos a uno */
@@ -47,11 +48,5 @@ class Product extends Model
     public function product_type()
     {
         return $this->belongsTo(ProductType::class);
-    }
-
-    /* Relacion uno a uno */
-    public function stock()
-    {
-        return $this->hasOne(Stock::class);
     }
 }

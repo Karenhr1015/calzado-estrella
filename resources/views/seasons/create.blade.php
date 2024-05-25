@@ -18,6 +18,12 @@
             {{-- Temporada Validacion --}}
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
+            {{-- Btn Cancelar --}}
+            <a href="{{ route('seasons.index') }}">
+                <x-secondary-button type="button" class="mt-4 bg-yellow-400">
+                    Cancelar
+                </x-secondary-button>
+            </a>
             {{-- Btn Submit --}}
             <x-primary-button type="submit" class="mt-2">
                 {{ __('Guardar') }}
@@ -25,5 +31,3 @@
         </form>
     </div>
 </x-app-layout>
-
-

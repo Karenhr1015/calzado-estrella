@@ -24,6 +24,12 @@
                 <input type="hidden" id="color_hex" name="color_hex" value="#000">
             </div>
 
+            {{-- Btn Cancelar --}}
+            <a href="{{ route('colors.index') }}">
+                <x-secondary-button type="button" class="mt-4 bg-yellow-400">
+                    Cancelar
+                </x-secondary-button>
+            </a>
             {{-- Btn Submit --}}
             <x-primary-button type="submit" class="mt-2">
                 {{ __('Guardar') }}

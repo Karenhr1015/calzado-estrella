@@ -40,14 +40,14 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             /* wholesale_price */
             'wholesale_price' => 'required|numeric|min:0',
-            /* size_id */
-            'size_id' => 'required|exists:sizes,id',
             /* season_id */
             'season_id' => 'required|exists:seasons,id',
             /* product_type_id */
             'product_type_id' => 'required|exists:product_types,id',
             /* description */
             'description' => 'nullable|string',
+            /* cantidad */
+            'amount' => 'required|numeric|min:0',
             /* photo */
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
@@ -58,6 +58,12 @@ class ProductRequest extends FormRequest
                 'array',
                 'min:1',
                 Rule::exists('colors', 'id'),
+            ];
+            $rules['sizes_ids'] = [
+                'required',
+                'array',
+                'min:1',
+                Rule::exists('sizes', 'id'),
             ];
         }
 
@@ -81,9 +87,10 @@ class ProductRequest extends FormRequest
             'wholesale_price.required' => 'El precio mayorista es obligatorio.',
             'wholesale_price.numeric' => 'El precio mayorista debe ser numérico.',
             'wholesale_price.min' => 'El precio mayorista debe ser mayor o igual a :min.',
-            /* size_id */
-            'size_id.required' => 'La talla es obligatoria.',
-            'size_id.exists' => 'La talla seleccionada no es válida.',
+            /* Sizes */
+            'sizes_ids.required' => 'Seleccione al menos una talla.',
+            'sizes_ids.array' => 'Las tallas seleccionadas deben estar en formato de array.',
+            'sizes_ids.min' => 'Seleccione al menos una talla.',
             /* season_id */
             'season_id.required' => 'La temporada es obligatoria.',
             'season_id.exists' => 'La temporada seleccionada no es válida.',
@@ -92,6 +99,10 @@ class ProductRequest extends FormRequest
             'product_type_id.exists' => 'El tipo de producto seleccionado no es válido.',
             /* description */
             'description.string' => 'La descripción debe ser una cadena de caracteres.',
+            /* Cantidad */
+            'amount.required' => 'La cantidad es obligatoria.',
+            'amount.numeric' => 'La cantidad debe ser numérica.',
+            'amount.min' => 'La cantidad debe ser mayor o igual a :min.',
             /* photo */
             'photo.image' => 'El archivo debe ser una imagen.',
             'photo.mimes' => 'La imagen debe ser de tipo: :values.',

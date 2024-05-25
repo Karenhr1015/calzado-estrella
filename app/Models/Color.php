@@ -28,6 +28,6 @@ class Color extends Model
     /* Relacion Muchos a Muchos */
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withTimestamps();
     }
 }

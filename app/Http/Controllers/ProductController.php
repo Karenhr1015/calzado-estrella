@@ -24,7 +24,7 @@ class ProductController extends Controller
             $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        $products = $query->with('colors')->latest()->paginate();
+        $products = $query->latest()->paginate();
 
         return view('products.index', compact('products'));
     }
@@ -61,8 +61,9 @@ class ProductController extends Controller
         $product = Product::create($validatedData);
         $product->save();
 
-        /* Syncronizar colores */
+        /* Syncronizar */
         $product->colors()->syncWithoutDetaching($request->color_ids);
+        $product->sizes()->syncWithoutDetaching($request->sizes_ids);
 
         /* Redireccionar a la vista de productos */
         return redirect()->route('products.index')->with('status', 'El producto se ha creado correctamente.');
@@ -73,7 +74,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::with('colors')->find($id);
+
+        return view('products.show', compact('product'));
     }
 
     /**

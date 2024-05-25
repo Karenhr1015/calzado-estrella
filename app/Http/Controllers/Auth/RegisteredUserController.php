@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'customer_type' => ['required'],
         ]);
 
-        /* Definir Estado */
+        /* Definir un rol y estado según el tipo de cliente */
         if($request->customer_type == 3){
             $role_id = 3; 
             $status = 0;

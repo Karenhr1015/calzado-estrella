@@ -12,16 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
+                    <x-nav-link :href="route('raiz')" :active="request()->routeIs('raiz')">
+                        {{ __('Tienda') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
-                    <x-nav-link :href="route('raiz')" :active="request()->routeIs('raiz')">
-                        {{ __('Tienda') }}
-                    </x-nav-link>
-                </div>
 
                 <!-- Administracion -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -87,12 +88,6 @@
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
-                    <x-nav-link :href="route('stocks.index')" :active="request()->routeIs('stocks.index')">
-                        {{ __('Gestionar Inventario') }}
-                    </x-nav-link>
                 </div>
             </div>
 

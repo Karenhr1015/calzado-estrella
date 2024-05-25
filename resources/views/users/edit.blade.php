@@ -1,16 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Añadir Usuarios Administradores
+            Editar Usuarios Administrador: {{ $user->name }}
         </h2>
     </x-slot>
     <div class="py-12">
-        <form class="max-w-sm mx-auto" action="{{ route('users.store') }}" method="POST">
+        <form class="max-w-sm mx-auto" action="{{ route('users.update', $user) }}" method="POST">
             @csrf
+            @method('PUT')
             {{-- Nombre --}}
             <div class="mb-5">
                 <x-input-label for="name" :value="__('Nombre')" />
-                <x-text-input id="name" class="block mt-1 w-full" name="name" :value="old('name')" autofocus
+                <x-text-input id="name" class="block mt-1 w-full" name="name" :value="old('name', $user->name)" autofocus
                     autocomplete="name" :placeholder="__('Ingrese un nombre...')" />
             </div>
             {{-- Nombre Validacion --}}
@@ -19,7 +20,7 @@
             {{-- Correo --}}
             <div class="mb-5">
                 <x-input-label for="email" :value="__('Correo')" />
-                <x-text-input id="email" class="block mt-1 w-full" name="email" :value="old('email')" autofocus
+                <x-text-input id="email" class="block mt-1 w-full" name="email" :value="old('email', $user->email)" autofocus
                     autocomplete="email" :placeholder="__('Ingrese un correo...')" />
             </div>
             {{-- Correo Validacion --}}

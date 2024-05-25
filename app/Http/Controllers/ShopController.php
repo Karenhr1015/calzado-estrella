@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stock;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -12,23 +12,21 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Stock::where('amount', '>', 0)->where('status', 1);
+        $query = Product::where('amount', '>', 0)->where('status', 1);
 
         if ($request->has('name')) {
-            $query->whereHas('product', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->input('name') . '%');
-            });
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        $stocks = $query->latest()->paginate();
+        $products = $query->latest()->paginate();
 
-        return view('shop.index', compact('stocks'));
+        return view('shop.index', compact('products'));
     }
 
     public function view($id)
     {
-        $stock = Stock::findOrFail($id);
-        return view('shop.view', compact('stock'));
+        $product = Product::findOrFail($id);
+        return view('shop.view', compact('product'));
     }
 
     /**

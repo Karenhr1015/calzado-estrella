@@ -19,11 +19,8 @@ return new class extends Migration
             $table->integer('wholesale_price');
             $table->text('description')->nullable();
             $table->string('photo')->nullable();
+            $table->integer('amount');
             $table->boolean('status')->default(1);
-            /* $table->foreignId('color_id')
-                ->constrained(); */
-            $table->foreignId('size_id')
-                ->constrained();
             $table->foreignId('product_type_id')
                 ->constrained();
             $table->foreignId('season_id')
