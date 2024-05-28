@@ -7,6 +7,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Middleware\VerifyUserStatus;
 
@@ -39,6 +40,11 @@ Route::middleware(['auth', VerifyUserStatus::class])->group(function () {
     /* Productos */
     Route::get('/products/dashboard', [ProductController::class, 'dashboard'])->name('products.dashboard');
     Route::resource('products', ProductController::class);
+
+    /* Tienda */
+    Route::get('cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::post('cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
 
 

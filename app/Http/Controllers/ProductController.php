@@ -100,7 +100,7 @@ class ProductController extends Controller
     {
         /* Obtener el producto */
         $product = Product::find($id);
-        
+
         /* Obtener los datos validados */
         $validatedData = $request->validated();
 
@@ -124,6 +124,7 @@ class ProductController extends Controller
 
         /* Sincronizar colores */
         $product->colors()->syncWithoutDetaching($request->color_ids);
+        $product->sizes()->syncWithoutDetaching($request->sizes_ids);
 
         return redirect()->route('products.index')->with('status', __('El producto se ha editado correctamente.'));
     }

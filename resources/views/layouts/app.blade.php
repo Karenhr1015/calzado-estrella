@@ -13,11 +13,12 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- Icon --}}
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('star.png') }}" type="image/x-icon">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Sweetalert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -26,7 +27,7 @@
         {{-- Componentes include --}}
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
+        <!-- Header -->
         @if (isset($header))
             <header class="bg-white dark:bg-gray-800 shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -35,11 +36,13 @@
             </header>
         @endif
 
-        <!-- Page Content -->
+        <!-- Contenido principal -->
         <main>
             {{ $slot }}
         </main>
     </div>
+
+    {{-- Componentes js --}}
     <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 </body>
 

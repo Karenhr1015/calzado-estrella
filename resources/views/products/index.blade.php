@@ -82,7 +82,7 @@
                                         {{ $product->id }}
                                     </th>
                                     <td class="px-4 py-3">
-                                        <img src="{{ asset('storage/' . $product->photo) }}"
+                                        <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
                                             alt="{{ $product->name }}" class="w-40 h-40">
                                     </td>
                                     <td class="px-4 py-3">{{ $product->code }}</td>

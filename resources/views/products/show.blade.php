@@ -11,7 +11,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {{-- Imagen del producto --}}
                     <div class="flex justify-center p-4">
-                        <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/products/product.png') }}"
+                        <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
                             alt="{{ $product->name }}" class="w-full h-auto max-w-md w-50 h-50">
                     </div>
                     {{-- Información del producto --}}

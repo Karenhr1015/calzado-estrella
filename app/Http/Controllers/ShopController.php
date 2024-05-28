@@ -12,7 +12,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::where('amount', '>', 0)->where('status', 1);
+        $query = Product::where('amount', '>', 1)->where('status', 1);
 
         if ($request->has('name')) {
             $query->where('name', 'like', '%' . $request->input('name') . '%');

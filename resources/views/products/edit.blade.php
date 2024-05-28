@@ -7,7 +7,7 @@
                     {{ __('Editar Producto') }} : ({{ $product->code }}) {{ $product->name }}
                 </h2>
                 <br>
-                <div class="flex space-x-2">
+                <div class="flex space-x-2 mb-4">
                     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         Colores:
                     </h2>
@@ -16,14 +16,26 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="flex space-x-2">
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Tallas:
+                    </h2>
+                    @foreach ($product->sizes as $size)
+                        <div class="w-10 h-10">
+                            {{ $size->value }} |
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <div class="px-4 py-3">
-                <img src="{{ asset('storage/' . $product->photo) }}" alt="" class="w-40 h-40">
+                <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
+                    alt="" class="w-40 h-40">
             </div>
         </div>
     </x-slot>
     <div class="py-12">
-        <form class="max-w-4xl mx-auto" action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+        <form class="max-w-4xl mx-auto" action="{{ route('products.update', $product->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -50,7 +62,6 @@
                     <x-input-label for="color_ids" :value="__('Colores')" />
                     <select id="color_ids" name="color_ids[]" multiple
                         class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                        <option></option>
                         @foreach ($colors as $color)
                             <option value="{{ $color->id }}"
                                 {{ in_array($color->id, old('color_ids', [])) ? 'selected' : '' }}>
@@ -62,19 +73,20 @@
                     <x-input-error :messages="$errors->get('color_ids')" class="mt-2" />
                 </div>
 
-                {{-- Talla --}}
+                {{-- Tallas --}}
                 <div class="mb-5">
-                    <x-input-label for="size_id" :value="__('Talla')" />
-                    <x-select id="size_id" name="size_id">
-                        <option></option>
+                    <x-input-label for="sizes_ids" value="Tallas" />
+                    <select id="sizes_ids" name="sizes_ids[]" multiple
+                        class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                         @foreach ($sizes as $size)
                             <option value="{{ $size->id }}"
-                                {{ $size->id == old('size_id', $product->size_id) ? 'selected' : '' }}>
-                                {{ $size->value }}</option>
+                                {{ in_array($size->id, old('sizes_ids', [])) ? 'selected' : '' }}>
+                                {{ $size->value }}
+                            </option>
                         @endforeach
-                    </x-select>
-                    {{-- Talla Validacion --}}
-                    <x-input-error :messages="$errors->get('size_id')" class="mt-2" />
+                    </select>
+                    {{-- Tallas Validacion --}}
+                    <x-input-error :messages="$errors->get('sizes_ids')" class="mt-2" />
                 </div>
 
                 {{-- Tipo de producto --}}
@@ -137,15 +149,30 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
+                {{-- Cantidad --}}
+                <div class="mb-5">
+                    <x-input-label for="amount" :value="__('Cantidad')" />
+                    <x-text-input id="amount" class="block mt-1 w-full" name="amount" :value="old('amount',$product->amount)"
+                        :placeholder="__('Ingrese la cantidad...')" type='number' min="0" />
+                    {{-- Cantidad Validacion --}}
+                    <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                </div>
+
                 {{-- Imagen --}}
                 <div class="mb-5">
                     <x-input-label for="photo" :value="__('Cambiar Foto del Producto')" />
-                    <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo"/>
+                    <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" />
                     {{-- Talla Validacion --}}
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                 </div>
             </div>
 
+            {{-- Btn Cancelar --}}
+            <a href="{{ route('products.index') }}">
+                <x-secondary-button type="button" class="mt-4 bg-yellow-400">
+                    Cancelar
+                </x-secondary-button>
+            </a>
             {{-- Btn Submit --}}
             <x-primary-button type="submit" class="mt-4">
                 {{ __('Guardar') }}
