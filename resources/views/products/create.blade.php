@@ -77,16 +77,18 @@
 
                 {{-- Temporada --}}
                 <div class="mb-5">
-                    <x-input-label for="season_id" :value="__('Temporada')" />
-                    <x-select id="season_id" name="season_id">
-                        @foreach ($seasons as $season)
+                    <x-input-label for="" value="Temporadas" />
+                    <select id="seasons_ids" name="seasons_ids[]" multiple
+                        class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @foreach ($seasons as $key => $season)
                             <option value="{{ $season->id }}"
-                                {{ $season->id == old('season_id') ? 'selected' : '' }}>
-                                {{ $season->name }}</option>
+                                {{ in_array($season->id, old('seasons_ids', [])) ? 'selected' : '' }}>
+                                {{ $season->name }}
+                            </option>
                         @endforeach
-                    </x-select>
-                    {{-- Temporada Validacion --}}
-                    <x-input-error :messages="$errors->get('season_id')" class="mt-2" />
+                    </select>
+                    {{-- Temporadas Validacion --}}
+                    <x-input-error :messages="$errors->get('seasons_ids')" class="mt-2" />
                 </div>
 
                 {{-- Precio --}}

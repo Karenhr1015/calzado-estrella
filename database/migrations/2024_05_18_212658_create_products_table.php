@@ -23,8 +23,6 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->foreignId('product_type_id')
                 ->constrained();
-            $table->foreignId('season_id')
-                ->constrained();
             $table->timestamps();
         });
     }

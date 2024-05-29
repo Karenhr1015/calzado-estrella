@@ -66,7 +66,6 @@
                                 <th scope="col" class="px-4 py-3">{{ __('Referencia') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Colores / Tallas') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Tipo de Producto') }}</th>
-                                <th scope="col" class="px-4 py-3">{{ __('Temporada') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Precio') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Precio mayorista') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Cantidad') }}</th>
@@ -106,7 +105,6 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3">{{ $product->product_type->name }}</td>
-                                    <td class="px-4 py-3">{{ $product->season->name }}</td>
                                     <td class="px-4 py-3"><strong
                                             class="text-green-950 text-xl">{{ number_format($product->price) }}</strong>
                                     </td>

@@ -37,7 +37,6 @@ class ProductController extends Controller
         $colors = Color::where('status', 1)->get();
         $sizes = Size::where('status', 1)->get();
         $seasons = Season::where('status', 1)->get();
-        $seasons = Season::where('status', 1)->get();
         $product_types = ProductType::all();
 
         return view('products.create', compact('colors', 'sizes', 'seasons', 'product_types'));
@@ -64,6 +63,8 @@ class ProductController extends Controller
         /* Syncronizar */
         $product->colors()->syncWithoutDetaching($request->color_ids);
         $product->sizes()->syncWithoutDetaching($request->sizes_ids);
+        $product->seasons()->syncWithoutDetaching($request->seasons_ids);
+
 
         /* Redireccionar a la vista de productos */
         return redirect()->route('products.index')->with('status', 'El producto se ha creado correctamente.');

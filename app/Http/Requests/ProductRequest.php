@@ -40,8 +40,6 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             /* wholesale_price */
             'wholesale_price' => 'required|numeric|min:0',
-            /* season_id */
-            'season_id' => 'required|exists:seasons,id',
             /* product_type_id */
             'product_type_id' => 'required|exists:product_types,id',
             /* description */
@@ -64,6 +62,12 @@ class ProductRequest extends FormRequest
                 'array',
                 'min:1',
                 Rule::exists('sizes', 'id'),
+            ];
+            $rules['seasons_ids'] = [
+                'required',
+                'array',
+                'min:1',
+                Rule::exists('seasons', 'id'),
             ];
         }
 
@@ -91,9 +95,10 @@ class ProductRequest extends FormRequest
             'sizes_ids.required' => 'Seleccione al menos una talla.',
             'sizes_ids.array' => 'Las tallas seleccionadas deben estar en formato de array.',
             'sizes_ids.min' => 'Seleccione al menos una talla.',
-            /* season_id */
-            'season_id.required' => 'La temporada es obligatoria.',
-            'season_id.exists' => 'La temporada seleccionada no es válida.',
+            /* Seasons */
+            'seasons_ids.required' => 'Seleccione al menos una temporada.',
+            'seasons_ids.array' => 'Las temporadas seleccionadas deben estar en formato de array.',
+            'seasons_ids.min' => 'Seleccione al menos una temporada.',
             /* product_type_id */
             'product_type_id.required' => 'El tipo de producto es obligatorio.',
             'product_type_id.exists' => 'El tipo de producto seleccionado no es válido.',

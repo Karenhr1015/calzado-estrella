@@ -25,7 +25,6 @@ class UniqueProductAttributes implements Rule
     {
         $exists = DB::table('products')
             ->where('name', request('name'))
-            ->where('season_id', request('season_id'))
             ->when($this->productId, function ($query) {
                 return $query->where('id', '!=', $this->productId);
             })

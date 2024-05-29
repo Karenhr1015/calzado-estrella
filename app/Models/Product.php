@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'name', 'color_id', 'product_type_id', 'season_id', 'price', 'wholesale_price', 'description', 'status', 'amount', 'photo'
+        'code', 'name', 'product_type_id', 'price', 'wholesale_price', 'description', 'status', 'amount', 'photo'
     ];
 
     /* Mutadores */
@@ -38,10 +38,10 @@ class Product extends Model
         return $this->belongsToMany(Size::class)->withTimestamps();
     }
 
-    /* Relacion Muchos a uno */
-    public function season()
+    /* Relacion Muchos a Muchos */
+    public function seasons()
     {
-        return $this->belongsTo(season::class);
+        return $this->belongsToMany(Season::class)->withTimestamps();
     }
 
     /* Relacion Muchos a uno */

@@ -2,7 +2,7 @@
     {{-- Cabecera --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Producto: ({{ $product->code }}) {{ $product->name }}   <x-status :type="$product->status"></x-status>
+            Producto: ({{ $product->code }}) {{ $product->name }} <x-status :type="$product->status"></x-status>
         </h2>
     </x-slot>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
@@ -52,6 +52,20 @@
                                         <strong>{{ $size->value }}</strong>
                                     </div> |
                                 @endforeach
+                            </div>
+                        </div>
+
+                        {{-- Temporadas --}}
+                        <div class="p-4">
+                            <h2 class="text-3xl font-bold mb-4">Temporadas</h2>
+                            <div class="flex space-x-2">
+                                <ul>
+                                    @foreach ($product->seasons as $season)
+                                        <li>
+                                            <strong>- {{ $season->name }}</strong>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
 

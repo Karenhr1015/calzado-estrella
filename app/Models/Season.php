@@ -25,9 +25,9 @@ class Season extends Model
         );
     }
 
-    /* Relacion uno a Muchos */
+    /* Relacion Muchos a Muchos */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class)->withTimestamps();
     }
 }
