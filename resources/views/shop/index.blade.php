@@ -25,8 +25,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($products as $product)
-                    <div
-                        class="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+                    <div class="flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                         <a href="{{ route('shop.view', $product) }}" class="flex justify-center items-center p-4">
                             <img class="rounded-t-lg"
                                 src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
@@ -37,8 +36,6 @@
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ $product->name }} - {{ $product->product_type->name }} </h5>
                             </div>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Talla: Temporada:
-                                {{ $product->season->name }}</p>
                             <div class="flex space-x-2 mb-3">
                                 <h2>Colores</h2>
                                 @foreach ($product->colors as $color)
