@@ -10,17 +10,25 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, string $type = 'admins')
     {
+        $type = $request->type;
         $query = User::query();
 
         if ($request->has('name')) {
             $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        $users = $query->where('role_id', 1)->paginate();
+        /* Administradores o mayoristas */
+        if($request->has('type') == 'mayoristas'){
+            $query->where('role_id', 3);
+        }else{
+            $query->where('role_id', 1);
+        }
 
-        return view('users.index', compact('users'));
+        $users = $query->paginate();
+
+        return view('users.index', compact('users', 'type'));
     }
 
     public function create()

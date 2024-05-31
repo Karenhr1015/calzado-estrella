@@ -49,10 +49,25 @@
                                     <div class="w-6 h-6 text-xl">{{ $size->value }}</div>
                                 @endforeach
                             </div>
-                            <div>
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Precio: {{ number_format($product->price) }} </h5>
-                            </div>
+                            @auth
+                                @if ($user->role_id == 3)
+                                    <div>
+                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                            Precio mayorista: {{ number_format($product->wholesale_price) }} </h5>
+                                    </div>
+                                @else
+                                    <div>
+                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                            Precio: {{ number_format($product->price) }} </h5>
+                                    </div>
+                                @endif
+                            @else
+                                <div>
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                        Precio: {{ number_format($product->price) }} </h5>
+                                </div>
+                            @endauth
+
                             <br>
                             <div class="mt-auto">
                                 <button type="button"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -12,6 +13,7 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
         $query = Product::where('amount', '>', 1)->where('status', 1);
 
         if ($request->has('name')) {
@@ -20,7 +22,7 @@ class ShopController extends Controller
 
         $products = $query->latest()->paginate();
 
-        return view('shop.index', compact('products'));
+        return view('shop.index', compact('products', 'user'));
     }
 
     public function view($id)
