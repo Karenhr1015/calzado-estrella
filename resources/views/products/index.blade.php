@@ -117,52 +117,72 @@
                                     <td class="px-4 py-3">
                                         <x-status :type="$product->status"></x-status>
                                     </td>
-                                    <td class="px-4 py-3 flex gap-5 content-center justify-items-center">
-                                        {{-- Ver --}}
-                                        <a href="{{ route('products.show', $product->id) }}">
-                                            <x-secondary-button>
-                                                <div class="flex gap-2 items-center">
-                                                    <svg data-slot="icon" fill="none" stroke-width="1.5"
-                                                        stroke="currentColor" viewBox="0 0 24 24" class="h-5 w-5"
-                                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z">
-                                                        </path>
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
-                                                    </svg>
-                                                    Ver
-                                                </div>
-                                            </x-secondary-button>
-                                        </a>
-                                        {{-- Editar --}}
-                                        <a href="{{ route('products.edit', $product->id) }}">
-                                            <x-secondary-button>
-                                                <div class="flex gap-2 items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        viewBox="0 0 512 512">
-                                                        <path fill="#7ba7d7"
-                                                            d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z" />
-                                                    </svg>
-                                                    Editar
-                                                </div>
-                                            </x-secondary-button>
-                                        </a>
-                                        {{-- Inactivar --}}
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="status" value="{{ $product->status }}">
-                                            <a :href="route('products.destroy', $product - > id)"
-                                                onclick="event.preventDefault(); this.closest('form').submit()">
+                                    <td class="px-4 py-3">
+                                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-7">
+                                            {{-- Ver --}}
+                                            <a href="{{ route('products.show', $product->id) }}">
                                                 <x-secondary-button>
                                                     <div class="flex gap-2 items-center">
-                                                        <x-status-button :status="$product->status"></x-status-button>
-                                                        {{ $product->status ? 'Inactivar' : 'Activar' }}
+                                                        <svg data-slot="icon" fill="none" stroke-width="1.5"
+                                                            stroke="currentColor" viewBox="0 0 24 24" class="h-5 w-5"
+                                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z">
+                                                            </path>
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                                                        </svg>
+                                                        Ver
                                                     </div>
                                                 </x-secondary-button>
                                             </a>
-                                        </form>
+                                            {{-- Editar --}}
+                                            <a href="{{ route('products.edit', $product->id) }}">
+                                                <x-secondary-button>
+                                                    <div class="flex gap-2 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                            viewBox="0 0 512 512">
+                                                            <path fill="#7ba7d7"
+                                                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z" />
+                                                        </svg>
+                                                        Editar
+                                                    </div>
+                                                </x-secondary-button>
+                                            </a>
+                                        </div>
+                                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-7">
+                                            {{-- Fotos --}}
+                                            <a href="{{ route('products.photos', $product->id) }}">
+                                                <x-secondary-button>
+                                                    <div class="flex gap-2 items-center">
+                                                        <svg data-slot="icon" fill="none" stroke-width="1.5" class="w-5 h-5 text-green-900"
+                                                            stroke="currentColor" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z">
+                                                            </path>
+                                                        </svg>
+                                                        Fotos
+                                                    </div>
+                                                </x-secondary-button>
+                                            </a>
+                                            {{-- Inactivar --}}
+                                            <form action="{{ route('products.destroy', $product->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="status" value="{{ $product->status }}">
+                                                <a :href="route('products.destroy', $product - > id)"
+                                                    onclick="event.preventDefault(); this.closest('form').submit()">
+                                                    <x-secondary-button>
+                                                        <div class="flex gap-2 items-center">
+                                                            <x-status-button :status="$product->status"></x-status-button>
+                                                            {{ $product->status ? 'Inactivar' : 'Activar' }}
+                                                        </div>
+                                                    </x-secondary-button>
+                                                </a>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

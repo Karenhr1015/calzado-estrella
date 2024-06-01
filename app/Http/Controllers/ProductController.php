@@ -149,4 +149,37 @@ class ProductController extends Controller
     {
         return view('products.dashboard');
     }
+
+    /* Fotos */
+    public function photos(string $id)
+    {
+        $product = Product::find($id);
+        return view('products.photos', compact('product'));
+    }
+
+    /* Fotos */
+    public function photos_store(Request $request, string $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'color_id' => 'required|exists:colors,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $product = Product::find($id);
+        $colorId = $request->input('color_id');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'product_' . $id . '_' . $colorId . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('products', $imageName, 'public');
+
+            /* Actualizar la tabla pivot */
+            $product->colors()->updateExistingPivot($colorId, ['img_path' => $imagePath]);
+
+            /* Redireccionar a la vista de productos */
+            return to_route('products.photos', ['id' => $product->id])->with('status', __('La foto por color se ha guardado correctamente.'));
+        }else{
+            return to_route('products.photos', ['id' => $product->id])->with('status', __('No se ha proporcionado una foto para el color seleccionado.'));
+        }
+    }
 }

@@ -69,7 +69,7 @@
                             @endauth
 
                             <br>
-                            <div class="mt-auto">
+                           {{--  <div class="mt-auto">
                                 <button type="button"
                                     class="add-to-cart inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     data-id="{{ $product->id }}">
@@ -81,7 +81,7 @@
                                             d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
                                     </svg>
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 @endforeach

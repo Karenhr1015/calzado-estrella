@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('color_id')->constrained();
+            $table->text('img_path')->default('');
             $table->timestamps();
         });
     }

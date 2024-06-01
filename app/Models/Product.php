@@ -28,7 +28,7 @@ class Product extends Model
     /* Relacion Muchos a Muchos */
     public function colors()
     {
-        return $this->belongsToMany(Color::class)->withTimestamps();
+        return $this->belongsToMany(Color::class)->withPivot('img_path')->withTimestamps();
     }
 
 

@@ -39,6 +39,8 @@ Route::middleware(['auth', VerifyUserStatus::class])->group(function () {
     Route::resource('seasons', SeasonController::class);
     /* Productos */
     Route::get('/products/dashboard', [ProductController::class, 'dashboard'])->name('products.dashboard');
+    Route::get('/products/photos/{id}', [ProductController::class, 'photos'])->name('products.photos');
+    Route::post('/products/photos_store/{id}', [ProductController::class, 'photos_store'])->name('products.photos_store');
     Route::resource('products', ProductController::class);
 
     /* Tienda */

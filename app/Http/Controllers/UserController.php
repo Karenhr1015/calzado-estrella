@@ -19,14 +19,7 @@ class UserController extends Controller
             $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-        /* Administradores o mayoristas */
-        if($request->has('type') == 'mayoristas'){
-            $query->where('role_id', 3);
-        }else{
-            $query->where('role_id', 1);
-        }
-
-        $users = $query->paginate();
+        $users = $query->where('role_id', 3)->paginate();
 
         return view('users.index', compact('users', 'type'));
     }

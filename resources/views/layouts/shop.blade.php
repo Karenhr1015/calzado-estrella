@@ -23,7 +23,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen">
 
         <!-- Header-->
         <header class="bg-white dark:bg-gray-800 shadow">
@@ -113,7 +113,7 @@
             buttons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     const productId = this.getAttribute('data-id');
-                    console.log('{{ route('cart.add', ':id') }}'.replace(':id', productId));
+                    // console.log('{{ route('cart.add', ':id') }}'.replace(':id', productId));
                     fetch('{{ route('cart.add', ':id') }}'.replace(':id', productId), {
                         method: 'POST',
                         headers: {
