@@ -9,6 +9,7 @@ use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use App\Http\Middleware\VerifyUserRol;
 use App\Http\Middleware\VerifyUserStatus;
 
 
@@ -19,7 +20,7 @@ Route::get('/view/{id}', [ShopController::class, 'view'])->name('shop.view');
 // Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 /* Rutas con Autentificacion */
-Route::middleware(['auth', VerifyUserStatus::class])->group(function () {
+Route::middleware(['auth', VerifyUserStatus::class, VerifyUserRol::class])->group(function () {
     /* Dashboard */
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 

@@ -26,6 +26,18 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="flex space-x-2">
+                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Temporadas:
+                    </h2>
+                    <ul>
+                        @foreach ($product->seasons as $season)
+                            <li>
+                                {{ $season->name }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <div class="px-4 py-3">
                 <img src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
@@ -106,18 +118,18 @@
 
                 {{-- Temporada --}}
                 <div class="mb-5">
-                    <x-input-label for="season_id" :value="__('Temporada')" />
-                    <x-select id="season_id" name="season_id">
-                        <option></option>
-                        @foreach ($seasons as $season)
+                    <x-input-label for="" value="Temporadas" />
+                    <select id="seasons_ids" name="seasons_ids[]" multiple
+                        class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @foreach ($seasons as $key => $season)
                             <option value="{{ $season->id }}"
-                                {{ $season->id == old('season_id', $product->season_id) ? 'selected' : '' }}>
+                                {{ in_array($season->id, old('seasons_ids', [])) ? 'selected' : '' }}>
                                 {{ $season->name }}
                             </option>
                         @endforeach
-                    </x-select>
-                    {{-- Temporada Validacion --}}
-                    <x-input-error :messages="$errors->get('season_id')" class="mt-2" />
+                    </select>
+                    {{-- Temporadas Validacion --}}
+                    <x-input-error :messages="$errors->get('seasons_ids')" class="mt-2" />
                 </div>
 
                 {{-- Precio --}}
@@ -152,7 +164,7 @@
                 {{-- Cantidad --}}
                 <div class="mb-5">
                     <x-input-label for="amount" :value="__('Cantidad')" />
-                    <x-text-input id="amount" class="block mt-1 w-full" name="amount" :value="old('amount',$product->amount)"
+                    <x-text-input id="amount" class="block mt-1 w-full" name="amount" :value="old('amount', $product->amount)"
                         :placeholder="__('Ingrese la cantidad...')" type='number' min="0" />
                     {{-- Cantidad Validacion --}}
                     <x-input-error :messages="$errors->get('amount')" class="mt-2" />
@@ -162,21 +174,26 @@
                 <div class="mb-5">
                     <x-input-label for="photo" :value="__('Cambiar Foto del Producto')" />
                     <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" />
-                    {{-- Talla Validacion --}}
+                    {{-- Imagen principal Validacion --}}
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+
+                    <x-input-label for="photo_sizes" :value="__('Tabla de tallas')" class="mt-2" />
+                    <x-text-input id="photo_sizes" class="block mt-1 w-full" type="file" name="photo_sizes" />
+                    {{-- Imagen tabla de tallas Validacion --}}
+                    <x-input-error :messages="$errors->get('photo_sizes')" class="mt-2" />
                 </div>
             </div>
 
+            {{-- Btn Submit --}}
+            <x-primary-button type="submit" class="mt-4">
+                {{ __('Guardar') }}
+            </x-primary-button>
             {{-- Btn Cancelar --}}
             <a href="{{ route('products.index') }}">
                 <x-secondary-button type="button" class="mt-4 bg-yellow-400">
                     Cancelar
                 </x-secondary-button>
             </a>
-            {{-- Btn Submit --}}
-            <x-primary-button type="submit" class="mt-4">
-                {{ __('Guardar') }}
-            </x-primary-button>
         </form>
     </div>
 </x-app-layout>

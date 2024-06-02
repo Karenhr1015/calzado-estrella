@@ -50,14 +50,26 @@ class ProductController extends Controller
         /* Obtener los datos validados */
         $validatedData = $request->validated();
 
-        /* Validar la existencia de una foto en la peticion */
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('products', 'public');
-            $validatedData['photo'] = $photoPath;
-        }
-
         /* Crear el producto */
         $product = Product::create($validatedData);
+        // $product->save();
+
+        /* Validar la existencia de una foto en la peticion */
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = 'product_' . $product->id . '.' . $file->getClientOriginalExtension();
+            $photoPath = $file->storeAs('products', $filename, 'public');
+            $product->photo = $photoPath;
+        }
+
+        /* Foto de la tabla de tallas */
+        if ($request->hasFile('photo_sizes')) {
+            $file = $request->file('photo_sizes');
+            $filename = 'product_sizes_' . $product->id . '.' . $file->getClientOriginalExtension();
+            $photoPath = $file->storeAs('products', $filename, 'public');
+            $product->photo_sizes = $photoPath;
+        }
+
         $product->save();
 
         /* Syncronizar */
@@ -113,12 +125,40 @@ class ProductController extends Controller
             }
 
             /* Subir y guardar la nueva foto */
-            $photoPath = $request->file('photo')->store('products', 'public');
+            $file = $request->file('photo');
+            $filename = 'product_' . $product->id . '.' . $file->getClientOriginalExtension();
+            $photoPath = $file->storeAs('products', $filename, 'public');
             $validatedData['photo'] = $photoPath;
         } else {
             /* Conservar la foto existente si no se envía una nueva */
             $validatedData['photo'] = $product->photo;
         }
+
+        /* Validar la existencia de una foto de tallas en la petición */
+        if ($request->hasFile('photo_sizes')) {
+            /* Eliminar la foto anterior si existe */
+            if ($product->photo_sizes) {
+                Storage::delete($product->photo_sizes);
+            }
+
+            /* Subir y guardar la nueva foto */
+            $file = $request->file('photo_sizes');
+            $filename = 'product_sizes_' . $product->id . '.' . $file->getClientOriginalExtension();
+            $photoPath = $file->storeAs('products', $filename, 'public');
+            $validatedData['photo_sizes'] = $photoPath;
+        } else {
+            /* Conservar la foto existente si no se envía una nueva */
+            $validatedData['photo_sizes'] = $product->photo_sizes;
+        }
+
+        if ($request->hasFile('photo_sizes')) {
+            $file = $request->file('photo_sizes');
+            $filename = 'product_sizes_' . $product->id . '.' . $file->getClientOriginalExtension();
+            $photoPath = $file->storeAs('products', $filename, 'public');
+            $product->photo_sizes = $photoPath;
+        }
+
+
 
         /* Actualizar el producto con los datos validados */
         $product->update($validatedData);
@@ -126,6 +166,7 @@ class ProductController extends Controller
         /* Sincronizar colores */
         $product->colors()->syncWithoutDetaching($request->color_ids);
         $product->sizes()->syncWithoutDetaching($request->sizes_ids);
+        $product->seasons()->syncWithoutDetaching($request->seasons_ids);
 
         return redirect()->route('products.index')->with('status', __('El producto se ha editado correctamente.'));
     }
@@ -178,7 +219,7 @@ class ProductController extends Controller
 
             /* Redireccionar a la vista de productos */
             return to_route('products.photos', ['id' => $product->id])->with('status', __('La foto por color se ha guardado correctamente.'));
-        }else{
+        } else {
             return to_route('products.photos', ['id' => $product->id])->with('status', __('No se ha proporcionado una foto para el color seleccionado.'));
         }
     }

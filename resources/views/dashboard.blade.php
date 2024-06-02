@@ -50,7 +50,7 @@
                         Gestionar Catalogo
                     </x-card-link>
                     {{-- Ver solicitudes mayoristas --}}
-                    <x-card-link href="">
+                    <x-card-link href="{{route('users.index')}}">
                         <x-slot name="icon">
                             <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
                                 class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">

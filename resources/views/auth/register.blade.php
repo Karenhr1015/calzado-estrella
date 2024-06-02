@@ -38,22 +38,22 @@
         </div>
 
         {{-- Customer type --}}
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <x-input-label for="customer_type" :value="__('Customer type')" />
             <select id="customer_type" name="customer_type"
                 class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                 <option value="2">Cliente Natural</option>
                 <option value="3">Mayorista</option>
             </select>
-        </div>
+        </div> --}}
 
         <!-- Company Name -->
-        <div class="mt-4">
+       {{--  <div class="mt-4">
             <x-input-label for="company_name" :value="__('Company Name')" />
             <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name"
                 :value="old('company_name')" required autofocus autocomplete="company_name" />
             <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
-        </div>
+        </div> --}}
 
 
         <div class="flex items-center justify-end mt-4">

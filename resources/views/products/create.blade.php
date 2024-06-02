@@ -1,5 +1,5 @@
 <x-app-layout>
-   
+
 
     {{-- Header --}}
     <x-slot name="header">
@@ -44,7 +44,7 @@
                     {{-- Colores Validacion --}}
                     <x-input-error :messages="$errors->get('color_ids')" class="mt-2" />
                 </div>
-                
+
                 {{-- Tallas --}}
                 <div class="mb-5">
                     <x-input-label for="sizes_ids" value="Tallas" />
@@ -133,8 +133,13 @@
                 <div class="mb-5">
                     <x-input-label for="photo" :value="__('Foto del Producto')" />
                     <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" />
-                    {{-- Talla Validacion --}}
+                    {{-- Imagen principal Validacion --}}
                     <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+
+                    <x-input-label for="photo_sizes" :value="__('Tabla de tallas')" class="mt-2" />
+                    <x-text-input id="photo_sizes" class="block mt-1 w-full" type="file" name="photo_sizes" />
+                    {{-- Imagen tabla de tallas Validacion --}}
+                    <x-input-error :messages="$errors->get('photo_sizes')" class="mt-2" />
                 </div>
 
             </div>

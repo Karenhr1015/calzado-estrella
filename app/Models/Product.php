@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'name', 'product_type_id', 'price', 'wholesale_price', 'description', 'status', 'amount', 'photo'
+        'code', 'name', 'product_type_id', 'price', 'wholesale_price', 'description', 'status', 'amount', 'photo', 'photo_sizes'
     ];
 
     /* Mutadores */

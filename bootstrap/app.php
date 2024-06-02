@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\VerifyUserRol;
 use App\Http\Middleware\VerifyUserStatus;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,5 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(VerifyUserStatus::class);
+        $middleware->append(VerifyUserRol::class);
    })
    ->create();

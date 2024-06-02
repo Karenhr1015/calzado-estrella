@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('wholesale_price');
             $table->text('description')->nullable();
             $table->string('photo')->nullable();
+            $table->string('photo_sizes')->nullable();
             $table->integer('amount');
             $table->boolean('status')->default(1);
             $table->foreignId('product_type_id')

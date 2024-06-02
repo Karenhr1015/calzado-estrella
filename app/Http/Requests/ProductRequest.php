@@ -48,6 +48,8 @@ class ProductRequest extends FormRequest
             'amount' => 'required|numeric|min:0',
             /* photo */
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            /* photo_sizes */
+            'photo_sizes' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
         if ($this->isMethod('POST')) {
@@ -112,6 +114,10 @@ class ProductRequest extends FormRequest
             'photo.image' => 'El archivo debe ser una imagen.',
             'photo.mimes' => 'La imagen debe ser de tipo: :values.',
             'photo.max' => 'La imagen no debe ser mayor de :max KB.',
+            /* photo_sizes */
+            'photo_sizes.image' => 'El archivo debe ser una imagen.',
+            'photo_sizes.mimes' => 'La imagen debe ser de tipo: :values.',
+            'photo_sizes.max' => 'La imagen no debe ser mayor de :max KB.',
         ];
     }
 }

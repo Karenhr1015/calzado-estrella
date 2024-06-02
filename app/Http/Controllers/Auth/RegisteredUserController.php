@@ -33,30 +33,22 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'customer_type' => ['required'],
+            // 'customer_type' => ['required'],
         ]);
-
-        /* Definir un rol y estado según el tipo de cliente */
-        if($request->customer_type == 3){
-            $role_id = 3; 
-            $status = 0;
-        }else{
-            $role_id = 2; 
-            $status = 1;
-        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'status' => $status,
-            'role_id' => $role_id,
+            'status' => 1,
+            'role_id' => 2,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // return redirect(route('dashboard', absolute: false)->whith('Se ha iniciado session exitosamente.'));
+        return  to_route('dashboard')->with('status', 'Se ha registrado el usuario y iniciado sesión exitosamente.');
     }
 }
