@@ -60,8 +60,9 @@
                             <x-primary-button
                                 onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                                <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"  class="w-5 h-5"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                                    class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25">
                                     </path>
@@ -91,6 +92,24 @@
             @endif
             {{ $slot }}
         </main>
+
+        <footer class="bg-gray-800 text-white py-4" style="position: relative; top: 100vh;">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center md:text-left">
+                        <p>&copy; 2024 Clazado Estrella. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="mt-2 md:mt-0">
+                        <ul class="flex space-x-4">
+                            <li><a href="#" class="hover:underline">Interior Plaza de Mercado - Calle 28 N°
+                                    25-69, Local 161</a></li>
+                            <li><a href="#" class="hover:underline">Contacto: 311111111</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
 
         {{-- Carrito --}}
         @auth
@@ -136,13 +155,31 @@
             buttons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     const productId = this.getAttribute('data-id');
+                    let selectedSize = document.getElementById('size_id').value;
+                    let selectedColor = document.querySelector('input[name="color"]:checked');
+
+                    if (!selectedColor) {
+                        Swal.fire({
+                            title: 'Advertencia!',
+                            text: 'Por favor, selecciona un color.',
+                            icon: 'warning',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+
+                    let color_id = selectedColor.value;
+
                     // console.log('{{ route('cart.add', ':id') }}'.replace(':id', productId));
                     fetch('{{ route('cart.add', ':id') }}'.replace(':id', productId), {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        body: JSON.stringify({
+                            size: selectedSize,
+                            color: color_id
+                        })
                     }).then(response => response.json()).then(data => {
                         if (data.success) {
                             /* Actualizar el contador del carrito */
@@ -171,8 +208,10 @@
                         }
                     }).catch(error => {
                         /* Fallo en la peticion AJAX */
+                        console.log(error);
                         Swal.fire({
                             title: 'Error!',
+                            // text: 'Ocurrió un error. Por favor, inténtalo de nuevo.',
                             text: 'Ocurrió un error. Por favor, inténtalo de nuevo.',
                             icon: 'error',
                             confirmButtonText: 'OK'

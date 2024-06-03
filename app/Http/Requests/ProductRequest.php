@@ -66,9 +66,9 @@ class ProductRequest extends FormRequest
                 Rule::exists('sizes', 'id'),
             ];
             $rules['seasons_ids'] = [
-                'required',
+                // 'required',
                 'array',
-                'min:1',
+                // 'min:1',
                 Rule::exists('seasons', 'id'),
             ];
         }
@@ -98,9 +98,9 @@ class ProductRequest extends FormRequest
             'sizes_ids.array' => 'Las tallas seleccionadas deben estar en formato de array.',
             'sizes_ids.min' => 'Seleccione al menos una talla.',
             /* Seasons */
-            'seasons_ids.required' => 'Seleccione al menos una temporada.',
+            // 'seasons_ids.required' => 'Seleccione al menos una temporada.',
             'seasons_ids.array' => 'Las temporadas seleccionadas deben estar en formato de array.',
-            'seasons_ids.min' => 'Seleccione al menos una temporada.',
+            // 'seasons_ids.min' => 'Seleccione al menos una temporada.',
             /* product_type_id */
             'product_type_id.required' => 'El tipo de producto es obligatorio.',
             'product_type_id.exists' => 'El tipo de producto seleccionado no es válido.',

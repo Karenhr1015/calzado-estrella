@@ -86,6 +86,13 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+
+                {{-- Ventas --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
+                    <x-nav-link :href="route('sales.list')" :active="request()->routeIs('sales.list')">
+                        {{ __('Ventas') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

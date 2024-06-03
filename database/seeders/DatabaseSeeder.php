@@ -40,6 +40,15 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1,
         ]);
 
+        /* Usuario Cliente */
+        User::factory()->create([
+            'name' => 'cliente',
+            'email' => 'cliente@cliente.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'role_id' => 2,
+        ]);
+
 
         User::factory(15)->create();
 

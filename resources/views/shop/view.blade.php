@@ -30,16 +30,22 @@
                     <div style="width: 27%" class="p-5 flex gap-5 flex-col h-[100%] overflow-auto custom-scroll">
                         @foreach ($product->colors as $color)
                             @if ($color->pivot->img_path)
-                                <img src="{{ asset('storage/' . $color->pivot->img_path) }}" alt="Color Image"
-                                    class="object-cover w-[154px] h-[115px] cursor-pointer color-image"
-                                    data-large-src="{{ asset('storage/' . $color->pivot->img_path) }}">
+                                <div>
+                                    <div class="w-8 h-8 border-2 rounded-full ml-5"
+                                        style="border-radius: 9999px;background-color:{{ $color->color_hex }}; position:absolute;">
+                                    </div>
+                                    <img src="{{ asset('storage/' . $color->pivot->img_path) }}" alt="Color Image"
+                                        class="object-cover w-[154px] h-[115px] cursor-pointer color-image"
+                                        data-large-src="{{ asset('storage/' . $color->pivot->img_path) }}">
+                                </div>
                             @endif
                         @endforeach
                     </div>
                     {{-- Imagen principal --}}
                     <div style="width: 100%; height: 600px;" class="p-5">
-                        <img id="mainImage" src="{{ asset('storage/' . $product->photo) }}" alt="Main Image"
-                            class="object-cover w-full h-full">
+                        <img id="mainImage"
+                            src="{{ $product->photo ? asset('storage/' . $product->photo) : asset('img/avatars/avatar_default.png') }}"
+                            alt="Main Image" class="object-cover w-full h-full">
                     </div>
                 </div>
                 {{-- Informacion del producto --}}
@@ -49,9 +55,10 @@
                     <div style="width: 100%" class="text-2xl">
                         <strong class="text-navIcon">{{ $product->name }}</strong>
                     </div>
-                    <div style="width: 100%" class="text-2xl ml-12">
+                    <p>
                         {{ $product->description }}
-                    </div>
+                    </p>
+                    <br><hr>
                     @php
                         $user = Auth::user();
                     @endphp
@@ -79,7 +86,7 @@
                         </div>
                     </div>
                     <div style="width: 55%" class="text-2xl ml-12 flex flex-col gap-5">
-                        <x-select>
+                        <x-select id="size_id">
                             @foreach ($product->sizes as $size)
                                 <option value="{{ $size->id }}">{{ $size->value }}</option>
                             @endforeach
@@ -94,10 +101,19 @@
                     <div style="width: 100%" class="text-2xl ml-12 flex flex-col gap-7">
                         <strong>Colores</strong>
                         <div class="flex space-x-2">
-                            @foreach ($product->colors as $color)
-                                <div class="w-8 h-8 border-2 rounded-full"
-                                    style="border-radius: 9999px;background-color:{{ $color->color_hex }};"></div>
-                            @endforeach
+                            <ul>
+                                @foreach ($product->colors as $color)
+                                    <li>
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" name="color" value="{{ $color->id }}"
+                                                class="form-radio h-5 w-5 text-blue-600">
+                                            <div class="w-8 h-8 border-2 rounded-full ml-5"
+                                                style="border-radius: 9999px;background-color:{{ $color->color_hex }};">
+                                            </div>
+                                        </label>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                     <div style="width: 100%" class="text-2xl ml-12 flex flex-col gap-7 mt-5">
@@ -130,8 +146,8 @@
                             Cerrar
                         </button>
                     </div>
-                    <img src="{{ asset('storage/' . $product->photo_sizes) }}" alt="Tabla de Tallas"
-                        class="w-full h-auto">
+                    <img src="{{ $product->photo_sizes ? asset('storage/' . $product->photo_sizes) : asset('img/avatars/avatar_default.png') }}"
+                        alt="Tabla de Tallas" class="w-full h-auto">
                 </div>
             </div>
         </div>

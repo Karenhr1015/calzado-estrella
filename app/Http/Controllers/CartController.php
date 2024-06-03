@@ -2,24 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Size;
 
 class CartController extends Controller
 {
     public function addToCart(Request $request, $productId)
     {
+        // dd($request);
         /* Validar la existencia del producto */
         $product = Product::where('amount', '>', 1)->where('id', $productId)->firstOrFail();
         if (!$product) {
             return response()->json(['success' => false, 'message' => 'Producto no encontrado.'], 404);
         }
 
+        if(!$request->input('size')){
+            return response()->json(['success' => false, 'message' => 'Selecciona una talla.'], 404);
+        }
+
+        if(!$request->input('color')){
+            return response()->json(['success' => false, 'message' => 'Selecciona un color.'], 404);
+        }
+
         $cart = session()->get('cart', []);
+
+        /* Valor de la talla escogida */
+        $size_id = $request->input('size');
+        $size_value = Size::find($size_id);
+
+        /* Valor del color escogido */
+        $color_id = $request->input('color');
+        $color_value = Color::find($color_id);
 
         /* Si el producto ya está en el carrito, incrementar la cantidad */
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity']++;
+
+
+            if (isset($cart[$productId]['sizes'][$size_id][$color_id])) {
+                $cart[$productId]['sizes'][$size_id][$color_id]["total"]++;
+            } else {
+                $cart[$productId]['sizes'][$size_id][$color_id] = [
+                    "name" => $size_value->value,
+                    "total" => 1,
+                    "color" => $color_value->color
+                ];
+            }
+
             $cart[$productId]['total'] = $cart[$productId]['quantity'] * $cart[$productId]['price'];
         } else {
             /* Si el producto no está en el carrito, añadirlo */
@@ -28,7 +59,16 @@ class CartController extends Controller
                 "quantity" => 1,
                 "total" => $product->price,
                 "price" => $product->price,
-                "photo" => $product->photo
+                "photo" => $product->photo,
+                "sizes" => [
+                    $size_id => [
+                        $color_id => [
+                            "name" => $size_value->value,
+                            "total" => 1,
+                            "color" => $color_value->color
+                        ]
+                    ]
+                ],
             ];
         }
 

@@ -20,7 +20,8 @@
                             </div>
                             <div class="bg-white p-4 shadow rounded">
                                 <h1 class="text-lg font-bold mb-4">({{ $product->code }}) {{ $product->name }}</h1>
-                                <p class="text-xs mb-2">{{ $product->description }}</p>
+                                <p class="text-xs mb-2 overflow-hidden text-ellipsis whitespace-nowrap">
+                                    {{ $product->description }}</p>
                                 {{-- Cantidades y Precios --}}
                                 <div>
                                     <h2 class="text-lg font-bold">Cantidad</h2>

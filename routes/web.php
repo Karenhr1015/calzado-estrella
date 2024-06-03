@@ -8,6 +8,7 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Middleware\VerifyUserRol;
 use App\Http\Middleware\VerifyUserStatus;
@@ -43,11 +44,18 @@ Route::middleware(['auth', VerifyUserStatus::class, VerifyUserRol::class])->grou
     Route::get('/products/photos/{id}', [ProductController::class, 'photos'])->name('products.photos');
     Route::post('/products/photos_store/{id}', [ProductController::class, 'photos_store'])->name('products.photos_store');
     Route::resource('products', ProductController::class);
+});
 
+Route::middleware(['auth', VerifyUserStatus::class])->group(function () {
     /* Tienda */
     Route::get('cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::post('cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::delete('cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+    /* Ventas */
+    Route::get('sales/list', [SaleController::class, 'list'])->name('sales.list');
+    Route::put('sales/confirm/{uuid}', [SaleController::class, 'confirm'])->name('sales.confirm');
+    Route::resource('sales', SaleController::class);
 });
 
 
