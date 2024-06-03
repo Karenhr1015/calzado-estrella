@@ -54,30 +54,45 @@
                 </div>
                 <div class="flex gap-[45px]">
                     @auth
-                        {{ Auth::user()->email }}
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-primary-button
-                                onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                                <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
-                                    class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25">
-                                    </path>
-                                </svg>
-                                {{ __('Cerrar sesión ') }}
-                            </x-primary-button>
-                        </form>
+                        <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <button
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400  dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                            style="width: 41px; height: 41px;">
+                                            <path fill="#080640"
+                                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                        </svg>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('sales.user_sales', Auth::user()->id)">
+                                        {{ __('Mis compras') }}
+                                    </x-dropdown-link>
+
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                            {{ __('Cerrar sesión ') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
+                    @else
+                        <a href="{{ route('dashboard') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                style="width: 41px; height: 41px;">
+                                <path fill="#080640"
+                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                            </svg>
+                        </a>
                     @endauth
-                    <a href="{{ route('dashboard') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                            style="width: 41px; height: 41px;">
-                            <path fill="#080640"
-                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                        </svg>
-                    </a>
+
                 </div>
             </div>
         </header>
@@ -85,6 +100,9 @@
 
         <!-- Contenido Principal -->
         <main>
+            @php
+                session()->pull('banners')
+            @endphp
             @if (session()->has('status'))
                 <x-alert>
                     {{ session()->pull('status') }}

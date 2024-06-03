@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,14 +16,34 @@ class ShopController extends Controller
     {
         $user = Auth::user();
         $query = Product::where('amount', '>', 1)->where('status', 1);
+        $isWoman = false;
 
         if ($request->has('name')) {
             $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
+        if ($request->has('woman')) {
+            $query->where('product_type_id', 3);
+            $isWoman = true;
+        }
+        if ($request->has('men')) {
+            $query->where('product_type_id', 2);
+            $isWoman = true;
+        }
+        if ($request->has('boys')) {
+            $query->where('product_type_id', 4);
+            $isWoman = true;
+        }
+        if ($request->has('girls')) {
+            $query->where('product_type_id', 5);
+            $isWoman = true;
+        }
+
+        $seasons = Season::where('status', 1)->get();
+
         $products = $query->latest()->paginate();
 
-        return view('shop.index', compact('products', 'user'));
+        return view('shop.index', compact('products', 'user', 'isWoman', 'seasons'));
     }
 
     public function view($id)

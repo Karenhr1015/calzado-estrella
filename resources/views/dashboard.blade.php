@@ -4,13 +4,18 @@
             {{ __('Welcome, administrator!') }}
         </h2>
     </x-slot>
+    @if (session()->has('status'))
+        <x-alert>
+            {{ session()->pull('status') }}
+        </x-alert>
+    @endif
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
         <div class="mx-auto max-w-screen-2xl px-4 lg:px-12">
             <div class="bg-white sm:rounded-lg overflow-hidden">
 
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4">
                     {{-- Historial de ventas --}}
-                    <x-card-link href="">
+                    <x-card-link href="{{ route('sales.list') }}">
                         <x-slot name="icon">
                             <svg height="200px" width="200px" version="1.1" id="x32" class="w-40 h-40"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -50,7 +55,7 @@
                         Gestionar Catalogo
                     </x-card-link>
                     {{-- Ver solicitudes mayoristas --}}
-                    <x-card-link href="{{route('users.index')}}">
+                    <x-card-link href="{{ route('users.index') }}">
                         <x-slot name="icon">
                             <svg data-slot="icon" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"
                                 class="w-40 h-40" xmlns="http://www.w3.org/2000/svg">

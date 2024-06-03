@@ -78,6 +78,32 @@ class SaleController extends Controller
         return view('sales.list', compact('sales'));
     }
 
+    /* Listado de las ventas */
+    public function user_sales(Request $request)
+    {
+        $query = Sale::query();
+        $query->where('user_id', auth()->user()->id);
+
+        if ($request->has('uuid')) {
+            $query->where('uuid', 'like', '%' . $request->input('uuid') . '%');
+        }
+
+        $sales = $query->latest()->paginate();
+
+        return view('sales.user_sales', compact('sales'));
+    }
+
+    /* Informacion de la venta del usuario */
+    public function user_sale_view($uuid)
+    {
+        $sale = Sale::where('uuid', $uuid)
+            ->with('sales_details')
+            ->with('user')
+            ->firstOrFail();
+
+        return view('sales.user_sale_view', compact('sale'));
+    }
+
     /* Detalles de una venta */
     public function show($uuid)
     {

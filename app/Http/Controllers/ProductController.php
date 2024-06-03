@@ -158,8 +158,6 @@ class ProductController extends Controller
             $product->photo_sizes = $photoPath;
         }
 
-
-
         /* Actualizar el producto con los datos validados */
         $product->update($validatedData);
 

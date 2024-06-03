@@ -54,6 +54,8 @@ Route::middleware(['auth', VerifyUserStatus::class])->group(function () {
 
     /* Ventas */
     Route::get('sales/list', [SaleController::class, 'list'])->name('sales.list');
+    Route::get('sales/user_sales/{id}', [SaleController::class, 'user_sales'])->name('sales.user_sales');
+    Route::get('sales/user_sale_view/{id}', [SaleController::class, 'user_sale_view'])->name('sales.user_sale_view');
     Route::put('sales/confirm/{uuid}', [SaleController::class, 'confirm'])->name('sales.confirm');
     Route::resource('sales', SaleController::class);
 });

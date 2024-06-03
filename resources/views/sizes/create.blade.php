@@ -18,16 +18,18 @@
             {{-- Talla Validacion --}}
             <x-input-error :messages="$errors->get('value')" class="mt-2" />
 
+            {{-- Btn Submit --}}
+            <x-primary-button type="submit" class="mt-2 ">
+                {{ __('Guardar') }}
+            </x-primary-button>
+
             {{-- Btn Cancelar --}}
             <a href="{{ route('sizes.index') }}">
-                <x-secondary-button type="button" class="mt-4 bg-yellow-400">
+                <x-secondary-button type="button" class="mt-4 text-white bg-red-800 hover:bg-red-700">
                     Cancelar
                 </x-secondary-button>
             </a>
-            {{-- Btn Submit --}}
-            <x-primary-button type="submit" class="mt-2">
-                {{ __('Guardar') }}
-            </x-primary-button>
+
         </form>
     </div>
 </x-app-layout>
