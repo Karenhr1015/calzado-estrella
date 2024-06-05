@@ -1,25 +1,4 @@
 <x-shop-layout>
-    {{-- Filtros --}}
-    <div class="py-12">
-        <div class="mx-auto sm:px-6 lg:px-8">
-            <div
-                class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-around bg-[#D5C4D7] text-[#080640]">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Temporada') }}
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Mujer') }}
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Hombre') }}
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Niños') }}
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- Contenido --}}
     <div class="py-12 flex flex-wrap justify-center gap-8">
         <div class="container mx-auto p-2">

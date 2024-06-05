@@ -9,6 +9,7 @@ use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShopController;
 use App\Http\Middleware\VerifyUserRol;
 use App\Http\Middleware\VerifyUserStatus;
@@ -34,6 +35,9 @@ Route::middleware(['auth', VerifyUserStatus::class, VerifyUserRol::class])->grou
     Route::resource('users', UserController::class);
     /* Colors */
     Route::resource('colors', ColorController::class);
+
+    /* Settings */
+    Route::resource('settings', SettingController::class);
 
     /* Tallas */
     Route::resource('sizes', SizeController::class);

@@ -7,6 +7,7 @@ use App\Models\ProductType;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Season;
+use App\Models\Setting;
 use App\Models\Size;
 use Illuminate\Support\Facades\Hash;
 
@@ -100,5 +101,8 @@ class DatabaseSeeder extends Seeder
         ProductType::factory()->create(['name' => 'Mujer',]);
         ProductType::factory()->create(['name' => 'Niño',]);
         ProductType::factory()->create(['name' => 'Niña',]);
+
+        /* Setting */
+        Setting::factory()->create(['key' => 'Temporada', 'value' => null]);
     }
 }

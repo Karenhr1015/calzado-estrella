@@ -49,7 +49,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'status' => 1,
-            'role_id' => 2,
+            'role_id' => 3,
         ]);
 
         return redirect()->route('users.index')->with('status', 'El cliente mayorista se ha creado correctamente.');

@@ -10,12 +10,11 @@
                     </x-application-logo>
                 </div>
 
-                <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
-                    <x-nav-link :href="route('raiz')" :active="request()->routeIs('raiz')">
-                        {{ __('Tienda') }}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
+                    <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')">
+                        Configuraciones
                     </x-nav-link>
-                </div> --}}
+                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-navIcon">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

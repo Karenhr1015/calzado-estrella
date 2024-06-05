@@ -36,6 +36,13 @@
             <x-primary-button type="submit" class="mt-2">
                 {{ __('Guardar') }}
             </x-primary-button>
+
+            {{-- Boton cancelar --}}
+            <a href="{{ route('colors.index') }}">
+                <x-cancel-button type="button" class="mt-4 text-white bg-red-800 hover:bg-red-700">
+                    Cancelar
+                </x-cancel-button>
+            </a>
         </form>
     </div>
 </x-app-layout>

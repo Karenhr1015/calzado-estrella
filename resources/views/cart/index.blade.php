@@ -32,7 +32,8 @@
                                     <li>
                                         <ul>
                                             @foreach ($details_items as $item)
-                                                <li>Talla: {{ $item["name"]}} | Color: {{ $item["color"]}} | Total: {{ $item['total'] }}</li>
+                                                <li>Talla: {{ $item['name'] }} | Color: {{ $item['color'] }} | Total:
+                                                    {{ $item['total'] }}</li>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -40,10 +41,11 @@
                             </ul>
                             </p>
                             <div class="mt-4">
-                                <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                <form id="delete-form-{{ $id }}" action="{{ route('cart.remove', $id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
+                                    <button type="button" onclick="confirmDelete({{ $id }})"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                         Eliminar del carrito
                                     </button>
@@ -56,5 +58,25 @@
         @else
             <p class="text-gray-700 dark:text-gray-400">Tu carrito está vacío.</p>
         @endif
+
+        <script>
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "No podrás revertir esto",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                })
+            }
+        </script>
+
     </div>
 </x-shop-layout>

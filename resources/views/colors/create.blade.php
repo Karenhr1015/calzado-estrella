@@ -32,9 +32,9 @@
 
             {{-- Boton cancelar --}}
             <a href="{{ route('colors.index') }}">
-                <x-secondary-button type="button" class="mt-4 text-white bg-red-800 hover:bg-red-700">
+                <x-cancel-button type="button" class="mt-4 text-white bg-red-800 hover:bg-red-700">
                     Cancelar
-                </x-secondary-button>
+                </x-cancel-button>
             </a>
 
             

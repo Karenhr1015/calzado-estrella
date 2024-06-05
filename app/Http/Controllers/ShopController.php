@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Season;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,35 +16,56 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $query = Product::where('amount', '>', 1)->where('status', 1);
-        $isWoman = false;
+        $temporadaId = Setting::first()->value;
+        if ($temporadaId) {
+            $query = Product::where('amount', '>', 1)
+                ->where('status', 1)
+                ->whereHas('seasons', function ($query) use ($temporadaId) {
+                    $query->where('seasons.id', $temporadaId);
+                });
+        } else {
+            $query = Product::where('amount', '>', 1)
+                ->where('status', 1);
+        }
+        $banner = false;
+        $filtros = [];
 
         if ($request->has('name')) {
             $query->where('name', 'like', '%' . $request->input('name') . '%');
+            $banner = true;
+            $filtros['Producto'] = $request->input('name');
         }
 
         if ($request->has('woman')) {
             $query->where('product_type_id', 3);
-            $isWoman = true;
+            $query->orWhere('product_type_id', 1);
+            $banner = true;
+            $filtros['Tipo de producto'] = 'Mujer';
         }
         if ($request->has('men')) {
             $query->where('product_type_id', 2);
-            $isWoman = true;
+            $query->orWhere('product_type_id', 1);
+            $banner = true;
+            $filtros['Tipo de producto'] = 'Hombre';
         }
         if ($request->has('boys')) {
             $query->where('product_type_id', 4);
-            $isWoman = true;
+            $banner = true;
+            $filtros['Tipo de producto'] = 'Niños';
         }
         if ($request->has('girls')) {
             $query->where('product_type_id', 5);
-            $isWoman = true;
+            $banner = true;
+            $filtros['Tipo de producto'] = 'Niñas';
         }
 
         $seasons = Season::where('status', 1)->get();
 
+        // $query->
+
         $products = $query->latest()->paginate();
 
-        return view('shop.index', compact('products', 'user', 'isWoman', 'seasons'));
+        return view('shop.index', compact('products', 'user', 'banner', 'seasons', 'filtros'));
     }
 
     public function view($id)

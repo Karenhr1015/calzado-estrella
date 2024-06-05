@@ -1,42 +1,14 @@
 <x-shop-layout>
-    <div class="py-12">
-        <div class="mx-auto sm:px-6 lg:px-8">
-
-            <div
-                class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-around bg-[#D5C4D7] text-[#080640]">
-                {{-- <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __('Temporada') }}
-                </div> --}}
-                <form class="flex items-center" action="{{ route('raiz') }}" method="GET">
-                    <input type="hidden" name="woman">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <x-primary-button class="bg-purple-100 text-black hover:bg-purple-50 ">
-                            {{ __('Mujer') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-                <form class="flex items-center" action="{{ route('raiz') }}" method="GET">
-                    <input type="hidden" name="men">
-                    <x-primary-button class="bg-purple-100 text-black hover:bg-purple-50 ">
-                        {{ __('Hombre') }}
-                    </x-primary-button>
-                </form>
-                <form class="flex items-center" action="{{ route('raiz') }}" method="GET">
-                    <input type="hidden" name="boys">
-                    <x-primary-button class="bg-purple-100 text-black hover:bg-purple-50 ">
-                        {{ __('Niños') }}
-                    </x-primary-button>
-                </form>
-                <form class="flex items-center" action="{{ route('raiz') }}" method="GET">
-                    <input type="hidden" name="girls">
-                    <x-primary-button class="bg-purple-100 text-black hover:bg-purple-50 ">
-                        {{ __('Niñas') }}
-                    </x-primary-button>
-                </form>
-            </div>
-        </div>
+    <div class="ml-10">
+        @foreach ($filtros as $key => $item)
+            <span
+                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150 mr-2 mt-2 mb-2 bg-purple-200 text-black hover:bg-purple-200"
+                style="color: black">
+                {{ $key }} - {{ $item }}
+            </span>
+        @endforeach
     </div>
-    @if (!$isWoman)
+    @if (!$banner)
         {{-- Carrusel --}}
         <x-carousel></x-carousel>
     @endif
