@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        session(['status' => 'Sesion iniciada correctamente.']);
+        session(['status' => 'Sesión iniciada correctamente.']);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

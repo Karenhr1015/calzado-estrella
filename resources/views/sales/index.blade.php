@@ -28,10 +28,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-64">
                     {{-- Datos --}}
                     <div class="bg-gray-100 shadow rounded p-10">
-                        <h1 class="text-[#080640] font-bold mb-5">Direccion de entrega</h1>
+                        <h1 class="text-[#080640] font-bold mb-5">Dirección de entrega</h1>
                         <hr>
                         <div class="mb-10 mt-10">
-                            <p>Escriba la direccion donde se va recibir el pedido</p>
+                            <p>Escriba la dirección donde se va recibir el pedido</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-96">
                             <div>
@@ -47,18 +47,18 @@
                                 {{-- Numero cuenta o telefono --}}
                                 <div class="mb-5">
                                     <x-input-label class="text-[#080640] font-bold" for="account_number"
-                                        :value="__('Numero cuenta o telefono') . '*'" />
+                                        :value="__('Número de cuenta o teléfono') . '*'" />
                                     <x-text-input id="account_number" class="block mt-1 w-full" name="account_number"
-                                        :value="old('account_number')" autofocus autocomplete="account_number" :placeholder="__('Ingrese su numero de cuenta o telefono del pago...')" />
+                                        :value="old('account_number')" autofocus autocomplete="account_number" :placeholder="__('Ingrese su número de cuenta o telefono del pago...')" />
                                     {{-- Numero cuenta o telefono  --}}
                                     <x-input-error :messages="$errors->get('account_number')" class="mt-2" />
                                 </div>
 
                                 {{-- Direccion --}}
                                 <div class="mb-5">
-                                    <x-input-label class="text-[#080640] font-bold" for="address" :value="__('Direccion') . '*'" />
+                                    <x-input-label class="text-[#080640] font-bold" for="address" :value="__('Dirección') . '*'" />
                                     <x-text-input id="address" class="block mt-1 w-full" name="address"
-                                        :value="old('address')" autofocus autocomplete="address" :placeholder="__('Ingrese su direccion...')" />
+                                        :value="old('address')" autofocus autocomplete="address" :placeholder="__('Ingrese su dirección...')" />
                                     {{-- Direccion Validacion --}}
                                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                                 </div>
@@ -77,9 +77,9 @@
                                 {{-- Telefono movil --}}
                                 <div class="mb-5">
                                     <x-input-label class="text-[#080640] font-bold" for="mobile_phone"
-                                        :value="__('Telefono movil')" />
+                                        :value="__('Teléfono móvil')" />
                                     <x-text-input id="mobile_phone" class="block mt-1 w-full" name="mobile_phone"
-                                        :value="old('mobile_phone')" autofocus autocomplete="mobile_phone" :placeholder="__('Ingrese su telefono movil...')" />
+                                        :value="old('mobile_phone')" autofocus autocomplete="mobile_phone" :placeholder="__('Ingrese su teleéono móvil...')" />
                                     {{-- Telefono movil Validacion --}}
                                     <x-input-error :messages="$errors->get('mobile_phone')" class="mt-2" />
                                 </div>
@@ -104,12 +104,12 @@
                             <ul>
                                 <li>
                                     <p><span class="tex-[#080640] font-bold">(1)</span> Ten en cuenta que el precio del
-                                        domicilio puede variar, se tendra contacto por el numero que digites en el
+                                        domicilio puede variar, se tendrá contacto por el número que digites en el
                                         formulario, para coordinar el precio del domicilio.</p>
                                 </li>
                                 <li>
                                     <p><span class="tex-[#080640] font-bold">(2)</span>Verificar la informacion del
-                                        domicilio que coincida con los datos de la cuenta desde la cual se realizara el
+                                        domicilio que coincida con los datos de la cuenta desde la cual se realizará el
                                         pago.</p>
                                 </li>
                             </ul>
@@ -233,7 +233,7 @@
                 <div>
                     <ul>
                         <li><span class="text-lg text-purple-800 font-bold">(1)</span> Una vez realizado el pago, la
-                            tienda verifica su pago y le informara los detalles del envio</li>
+                            tienda verifica su pago y le informará los detalles del envio</li>
                         <li><span class="text-lg text-purple-800 font-bold">(2)</span> Los datos del formulario deben
                             coincidir con la cuenta desde la que se realizara el pago</li>
                     </ul>
