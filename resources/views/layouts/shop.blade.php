@@ -170,7 +170,7 @@
                         <ul class="flex space-x-4">
                             <li><a href="#" class="hover:underline">Interior Plaza de Mercado - Calle 28 N°
                                     25-69, Local 161</a></li>
-                            <li><a href="#" class="hover:underline">Contacto: 311111111</li>
+                            <li><a href="#" class="hover:underline">Contacto: 3012036381</li>
                         </ul>
                     </div>
                 </div>
