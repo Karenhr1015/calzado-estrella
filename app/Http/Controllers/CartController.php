@@ -53,12 +53,18 @@ class CartController extends Controller
 
             $cart[$productId]['total'] = $cart[$productId]['quantity'] * $cart[$productId]['price'];
         } else {
+            $role_id = auth()->user()->role_id;
+            if($role_id == 3){
+                $price = $product->wholesale_price;
+            }else{
+                $price = $product->price;
+            }
             /* Si el producto no está en el carrito, añadirlo */
             $cart[$productId] = [
                 "name" => $product->name,
                 "quantity" => 1,
-                "total" => $product->price,
-                "price" => $product->price,
+                "total" => $price,
+                "price" => $price,
                 "photo" => $product->photo,
                 "sizes" => [
                     $size_id => [
